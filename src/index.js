@@ -6,9 +6,6 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-    </Route>
-  </Router>,
+  <App />,
   document.getElementById('root')
 );
