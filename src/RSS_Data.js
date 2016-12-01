@@ -39,6 +39,7 @@ var _RSS_FEEDS = {
      }
 }
 
+export default _RSS_FEEDS;
 // Feednami 
 // User selects an rss feed 
 // goes to feednami (rss feed .rssurl )
