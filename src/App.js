@@ -7,7 +7,8 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 import LazyLoad from 'react-lazy-load';
 //load CSS for this module
-
+//import './css/style.css';
+//import './css/animate.css';
 import { Button, Well, Collapse } from 'react-bootstrap';
 /*global feednami*/
 /*Feednami is a package downloaded and used to collect RSS Feed data and then convert it from XML into JSON without cross domain errors*/
