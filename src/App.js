@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 
 //load LazyLoad for this module for generating the cards for each news article
@@ -5,8 +7,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 import LazyLoad from 'react-lazy-load';
 //load CSS for this module
-import './css/style.css';
-import './css/animate.css';
+
 import { Button, Well, Collapse } from 'react-bootstrap';
 /*global feednami*/
 /*Feednami is a package downloaded and used to collect RSS Feed data and then convert it from XML into JSON without cross domain errors*/
@@ -50,7 +51,7 @@ $(document).ready(function () {
 
 
 // Object which is a directory containing the RSS News Links (in XML Format) for India and each city in India  
-/*var _RSS_URLS = {
+var _RSS_URLS = {
 
     Nation: "http://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms",
     Business: "http://timesofindia.indiatimes.com/rssfeeds/1898055.cms",
@@ -69,7 +70,7 @@ $(document).ready(function () {
     Surat: "http://timesofindia.indiatimes.com/rssfeeds/3942660.cms",
     Jaipur: "http://timesofindia.indiatimes.com/rssfeeds/3012544.cms",
     Rajkot: "http://timesofindia.indiatimes.com/rssfeeds/3942663.cms"
-};*/
+};
 
 
 //Class which generates the entire application being created
