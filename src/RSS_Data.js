@@ -1,6 +1,6 @@
 var _RSS_FEEDS = {
     Seattle: {
-        SeattleTimes: {
+            SeattleTimes: {
             Name: "Seattle Times Political News",
             Description: "This is a news feed about Seattle politics ",
             RSSURL: 'http://www.seattletimes.com/politics/feed/'

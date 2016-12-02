@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 
 //load LazyLoad for this module for generating the cards for each news article
@@ -84,14 +82,15 @@ class App extends React.Component {
         super(props)
 
         
-        _RSS_FEEDS.forEach(function(city) {
-            for (var RSS in city) {
-                for (var info in RSS) {
+       //Object.keys(_RSS_FEEDS).forEach(function(city) {
+            Object.keys(_RSS_FEED[city]).forEach(function(src) {
+               console.log("Hello");
+                /*for (var info in RSS) {
                     var temp = {};
                     if (info == 'Name') {
                         console.log(info);
                     }
-                }
+                }*/
             }
         });
         // Variable created to hold information about the different Feed Names
