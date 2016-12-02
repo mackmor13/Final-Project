@@ -124,7 +124,6 @@ class App extends React.Component {
             //I want to put this in the App's state
             this.setState({ feed: entries });
         }
-
     }
 
     //this changes the feed to whatever category is selected from the navigation list
