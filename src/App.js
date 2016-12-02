@@ -13,10 +13,10 @@ import { Button, Well, Collapse } from 'react-bootstrap';
 /*Feednami is a package downloaded and used to collect RSS Feed data and then convert it from XML into JSON without cross domain errors*/
 import './feednami-client.js';
 import $ from 'jquery';
-
+import firebase from 'firebase';
 import cheerio from 'cheerio';
 import ReactHtmlParser from 'react-html-parser';
-import _RSS_FEEDS from './RSS_Data'; 
+import _RSS_FEEDS from './fb_obj_design'; 
 
 //For animation of the navigation bar
 //Sourced from http://bootsnipp.com/user/snippets/45GQR
@@ -82,17 +82,32 @@ class App extends React.Component {
 
         super(props)
 
-        
-        _RSS_FEEDS.forEach(function(city) {
-            for (var RSS in city) {
-                for (var info in RSS) {
-                    var temp = {};
-                    if (info == 'Name') {
-                        console.log(info);
-                    }
-                }
-            }
-        });
+        console.log(_RSS_FEEDS);
+        // FIELDS TO ACCESS:
+        /**
+         * 'Name' =>
+         * 'Description'
+         * 'RSSURL'
+         * 'Station'
+         */
+
+        // Object.keys(_RSS_FEEDS).forEach(function(city) {            
+        //     Object.keys(_RSS_FEEDS[city]).forEach(function(src) {
+        //         console.log(_RSS_FEEDS[city][src]['Name']);
+        //     });
+        // });
+
+        // _RSS_FEEDS.forEach(function(city) {
+        //     for (var RSS in city) {
+        //         console.log(RSS[Name]);
+        //         for (var info in RSS) {
+        //             var temp = {};
+        //             if (info == 'Name') {
+        //                 console.log(info);
+        //             }
+        //         }
+        //     }
+        // });
         // Variable created to hold information about the different Feed Names
         var feedNames = Object.keys(_RSS_URLS);
 
@@ -119,6 +134,7 @@ class App extends React.Component {
             for (var i = 0; i < entries.length; i++) {
                 var entry = entries[i];
             }
+            console.log(entries);
 
             //this is wher I have data
             //I want to put this in the App's state
@@ -309,7 +325,8 @@ class Article extends React.Component {
                 <Collapse in={this.state.open} style={{ height: "100%" }}>
                     <div>
                         <Well>
-                            <ArticleContent linkInfo={this.props.info.link} />
+                            { /* <ArticleContent linkInfo={this.props.info.link} /> */} 
+                            {this.props.info.description}
                             <FinishedReadingButton data={websiteLinkHttps} opacityChanger={this.finishedReading} articleDelete={this.deleteArticle} />
 
                         </Well>
@@ -361,7 +378,7 @@ class ArticleContent extends React.Component {
         let imageCode = cheerio.load(image);
         var srcPath = imageCode('img').attr('src');
 
-        console.log("Https Link" + this.state.linkData);
+        //console.log("Https Link" + this.state.linkData);
 
         var link = this.state.linkData;
 
