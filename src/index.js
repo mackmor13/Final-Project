@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import App, {NewsFeed, Stats} from './App';
+import App, {NewsFeed, Stats, About} from './App';
 import Join from './join'
 import Login from './login'
 import firebase from 'firebase';
@@ -22,11 +22,13 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App} >
+      <IndexRoute component={NewsFeed} />
       <Route path="join" component={Join} />
       <Route path="login" component={Login} />
-      {/* <IndexRoute component={NewsFeed} />
       <Route path="newsfeed" component={NewsFeed} />
-      <Route path="stats" component={Stats}*/}
+      <Route path="stats" component={Stats} />
+      <Route path="about" component={About} />
+
     </Route>
   </Router>,  document.getElementById('root')
 );
