@@ -49,10 +49,6 @@ $(document).ready(function () {
 });
 
 
-
-
-
-
 //Class which generates the entire application being created
 class App extends React.Component {
 
@@ -119,35 +115,29 @@ class App extends React.Component {
                 <li><Link to="/stats" activeClassName="activeLink">Stats</Link></li>
                 <li><Link to="/about" activeClassName="activeLink">About</Link></li>
                 </ul>;
+             
+
         }
 
 
         return (
-            <div id="wrapper">
-
-
-                <div className="container" role="banner" >
-
-
-                    <h1>Better Than Reuters</h1>
-                    <p>Come react with people</p>
+                <div>
+                <div>
                     {this.state.userId &&
-                        <div>
-                            <div className="logout">
-                            
-                                <button className="flat" onClick={() => this.signOut()}>Sign out {firebase.auth().currentUser.displayName}</button>
-                            </div>
-                            {navbar}
-                            
+                    <div>
+                    <div className="logout">
+                    <button className="flat" onClick={() => this.signOut()}>Sign out {firebase.auth().currentUser.displayName}</button>
+                    </div>
 
-                        </div>
+                    
+
+                    </div>
+                    
                     }
+                </div>
+                {this.props.children}
 
                 </div>
-                <div className="col-xs-9">
-                    {this.props.children}
-                </div>
-            </div>
         );
     }
 }

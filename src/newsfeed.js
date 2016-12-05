@@ -10,7 +10,7 @@ import { Button, Well, Collapse } from 'react-bootstrap';
 
 class NewsFeed extends React.Component {
     render () {
-        return ( <div>Hello</div>);
+        return ( <HorizontalNavigation />);
     }
 }
 

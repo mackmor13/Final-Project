@@ -6,11 +6,7 @@ import NewsFeed from './newsfeed'
 import Join from './join'
 import Login from './login'
 import firebase from 'firebase';
-//load CSS for this module
-import './css/index.css';
-import './css/card.css';
-import './css/animate.css';
-import './css/Flat-UI-master/dist/css/flat-ui.css';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 
