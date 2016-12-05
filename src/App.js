@@ -25,6 +25,7 @@ class App extends React.Component {
         super(props);
         this.state = { userId: null };
     }
+
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -35,6 +36,7 @@ class App extends React.Component {
             }
         })
     }
+
     signUp(email, password, preferredCategory, preferredFeed) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function (firebaseUser) {
@@ -53,10 +55,12 @@ class App extends React.Component {
             .then(() => this.forceUpdate())
             .catch((err) => console.log(err));
     }
+
     signIn(email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .catch((err) => console.log(err));
     }
+
     signOut() {
         firebase.auth().signOut();
         hashHistory.push('/login');
@@ -76,10 +80,10 @@ class App extends React.Component {
             // content = (this.props.children);
             // //content = <p>hey</p>;
             navbar = <ul>
-                <li><Link to="/newsfeed" activeClassName="activeLink">News Feed</Link></li>
+                <li><a><Link to="/newsfeed" activeClassName="activeLink">News Feed</Link></a></li>
                 <li><Link to="/stats" activeClassName="activeLink">Stats</Link></li>
                 <li><Link to="/about" activeClassName="activeLink">About</Link></li>
-            </ul>;
+                </ul>;
         }
 
 
@@ -111,22 +115,28 @@ class App extends React.Component {
 }
 
 export class NewsFeed extends React.Component {
+    
     componentDidMount() {
         //checks if firebase has a current user
         if (!firebase.auth().currentUser) {
             hashHistory.push('/login');
         }
     }
+      
     render() {
         return <div><p>news feed section</p></div>
     }
 }
 
-
 export class Stats extends React.Component {
-    render() {
-        return <div><p>stats section</p></div>
+
+    componentDidMount() {
+        //checks if firebase has a current user
+        if (!firebase.auth().currentUser) {
+            hashHistory.push('/login');
     }
+    }
+
 }
 
 export class About extends React.Component {
