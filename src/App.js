@@ -4,17 +4,16 @@ import { Link, hashHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 import LazyLoad from 'react-lazy-load';
 //load CSS for this module
-//import './css/style.css';
-//import './css/animate.css';
+import './css/index.css';
+import './css/card.css';
+import './css/animate.css';
+import './css/Flat-UI-master/dist/css/flat-ui.css';
 import { Button, Well, Collapse } from 'react-bootstrap';
 /*global feednami*/
-/*Feednami is a package downloaded and used to collect RSS Feed data and then convert it from XML into JSON without cross domain errors*/
-import './feednami-client.js';
 import $ from 'jquery';
 import firebase from 'firebase';
 import cheerio from 'cheerio';
 import ReactHtmlParser from 'react-html-parser';
-import _RSS_FEEDS from './fb_obj_design';
 import SignUpForm from './join';
 import SignInForm from './login';
 
@@ -124,7 +123,7 @@ export class NewsFeed extends React.Component {
     }
       
     render() {
-        return <div><p>news feed section</p></div>
+        return <NewsFeed />
     }
 }
 
@@ -134,12 +133,21 @@ export class Stats extends React.Component {
         //checks if firebase has a current user
         if (!firebase.auth().currentUser) {
             hashHistory.push('/login');
+        }
     }
+    render() {
+        return<div><p>stats section</p></div>
     }
 
 }
 
 export class About extends React.Component {
+    componentDidMount() {
+        //checks if firebase has a current user
+        if (!firebase.auth().currentUser) {
+            hashHistory.push('/login');
+        }
+    }
     render() {
         return <div><p>about section</p></div>
     }
