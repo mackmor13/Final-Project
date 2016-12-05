@@ -17,6 +17,42 @@ import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './join';
 import SignInForm from './login';
 
+//For animation of the navigation bar
+//Sourced from http://bootsnipp.com/user/snippets/45GQR
+$(document).ready(function () {
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+        isClosed = false;
+
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+        if (isClosed === true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+});
+
+
+
+
+
+
 //Class which generates the entire application being created
 class App extends React.Component {
 
@@ -79,7 +115,7 @@ class App extends React.Component {
             // content = (this.props.children);
             // //content = <p>hey</p>;
             navbar = <ul>
-                <li><a><Link to="/newsfeed" activeClassName="activeLink">News Feed</Link></a></li>
+                <li><Link to="/newsfeed" activeClassName="activeLink">News Feed</Link></li>
                 <li><Link to="/stats" activeClassName="activeLink">Stats</Link></li>
                 <li><Link to="/about" activeClassName="activeLink">About</Link></li>
                 </ul>;
@@ -98,9 +134,12 @@ class App extends React.Component {
                     {this.state.userId &&
                         <div>
                             <div className="logout">
-                                <button className="btn btn-warning signout" onClick={() => this.signOut()}>Sign out {firebase.auth().currentUser.displayName}</button>
+                            
+                                <button className="flat" onClick={() => this.signOut()}>Sign out {firebase.auth().currentUser.displayName}</button>
                             </div>
                             {navbar}
+                            
+
                         </div>
                     }
 
