@@ -16,6 +16,8 @@ import cheerio from 'cheerio';
 import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './join';
 import SignInForm from './login';
+import Select from 'react-select';
+import './css/selection.css';
 
 //For animation of the navigation bar
 //Sourced from http://bootsnipp.com/user/snippets/45GQR
@@ -101,6 +103,8 @@ class App extends React.Component {
 
     render() {
 
+
+
         var content = null;
         var navbar = null;
         if (!this.state.userId) {
@@ -155,7 +159,7 @@ class App extends React.Component {
                         <li onClick={() =>
                             this.signOut()}>
                             <Link className="navOption" >
-                            Sign Out {firebase.auth().currentUser.displayName} </Link>
+                            Sign Out {firebase.auth().currentUser.preferredCategory} </Link>
                         </li>
                     </ul>
                     </nav>;
@@ -163,127 +167,42 @@ class App extends React.Component {
 
 
         return (
-            <div id="wrapper">
+                <div id="wrapper">
 
-
-               <div>
-
-                    
                     {this.state.userId &&
                             <div>
                             {navbar}
-                            
+
                             </div>
-                                
-                    }
-                    <div id="page-content-wrapper">
-                    <div>
-                    <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
-                            <div className="hamburgerSize">
-                            <span className="hamb-top" />
-                            <span className="hamb-middle" />
-                            <span className="hamb-bottom" />
-                            </div>
-                    </button>
+
+                        }
+
+                        <div id="page-content-wrapper">
+                                    
+                                    <span>
+                                    <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
+                                        <div className="hamburgerSize">
+                                                <span className="hamb-top" />
+                                                <span className="hamb-middle" />
+                                                <span className="hamb-bottom" />
+                                        </div>
+                                    </button>
+                                    </span>
+                                    
 
 
-                    </div>
-                    </div>
-                    
-                    {this.props.children}
-                
+                                     {this.props.children}
+
+                        </div>
+
                 </div>
             
-            </div>
+
         );
     }
 }
 
-export class NewsFeed extends React.Component {
-    
-    componentDidMount() {
-        //checks if firebase has a current user
-        if (!firebase.auth().currentUser) {
-            hashHistory.push('/login');
-        }
-    }
-      
-    render() {
-        return (
-        
-             <div>
-                            <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
-                            <div className="hamburgerSize">
-                            <span className="hamb-top" />
-                            <span className="hamb-middle" />
-                            <span className="hamb-bottom" />
-                            </div>
-                            </button>
 
-                            <div className="drop_down_menu">
-                            <span className = "selectCategory"> 
-
-                            <span>
-
-                            <button className = "flat-butt flat-butt-category" onClick={() => this.setState({ categoriesopen: !this.state.categoriesopen })}> 
-                            General <i className="fa fa-sort-desc" aria-hidden="true"></i>
-                            </button>
-
-                            <Collapse in={this.state.categoriesopen} className="dropDownOptions scroller">
-
-                            <div className="dropDownCategoryTitle">
-
-                            <div className="categoryList">Categories </div> 
-                            <div>
-                              <ul>
-                              <li>General</li>
-                              <li>Sports</li>
-                              <li>Technology</li>
-                              <li>Entertainment</li>
-                              <li>Music</li>
-                              <li>Science and Nature</li>
-                              </ul>
-                            </div>
-                            <div className="categoryList">Location</div> 
-                            <div>
-                              <ul >
-                              <li>Australia</li>
-                              <li>India</li>
-                              <li>Germany</li>
-                              <li>Italy</li>
-                              <li>United Kingdom</li>
-                              <li>United States</li>
-                              </ul>
-                            </div>
-
-
-
-                            </div>
-                            </Collapse>
-
-                            <button className = "flat-butt flat-butt-category" onClick={() => this.setState({ feedNamesopen: !this.state.feedNamesopen })}> 
-                            BBC <i className="fa fa-sort-desc" aria-hidden="true"></i>
-                            </button>
-
-                            <Collapse in={this.state.feedNamesopen} className="dropDownOptions scroller">
-
-                            <div className="dropDownCategoryTitle">
-
-                            FeedNames 
-
-                            <div></div>
-
-                            </div>
-                            </Collapse>
-
-                            </span>
-                            </span> 
-                        
-                            </div>
-            </div>
-
-        );
-}}
 
 export class Stats extends React.Component {
 
@@ -310,5 +229,7 @@ export class About extends React.Component {
         return <div><p>about section</p></div>
     }
 }
+
+
 
 export default App; //make this class available to other files (e.g., index.js) 

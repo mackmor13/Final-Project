@@ -1,18 +1,4 @@
-import React from 'react';
-import firebase from 'firebase';
-import { Link, hashHistory } from 'react-router';
-//load CSS for this module
-import './css/index.css';
-import './css/card.css';
-import './css/animate.css';
-import './css/Flat-UI-master/dist/css/flat-ui.css';
-import Select from 'react-select';
-import './css/selection.css';
-
-//import require bootstrap components such as button, well, collapse
-import { Button, Well, Collapse } from 'react-bootstrap';
-
-var _FIREBASE = {
+{
   "Australia" : {
     "abcnewsau" : "abcnewsau",
     "theguardianau" : "theguardianau"
@@ -1221,8 +1207,8 @@ var _FIREBASE = {
   },
   "users" : {
     "ETP9mIUpPZTqGS1st5yp3ToIKpz1" : {
-      "preferredCategory" : "UnitedKingdom",
-      "preferredFeed" : "bbcnews"
+      "preferredCategory" : "India",
+      "preferredFeed" : "thehindu"
     }
   },
   "wiredde" : {
@@ -1255,125 +1241,4 @@ var _FIREBASE = {
       "small" : "http://i.newsapi.org/wirtschafts-woche-s.png"
     }
   }
-};
-
-class NewsFeed extends React.Component {
-    
-    constructor(props) {
-
-        super(props)
-
-            //Get this data from firebase
-            
-            // Get the signed in user's preferredCategory
-            var userPreferenceCategory = _FIREBASE.users.ETP9mIUpPZTqGS1st5yp3ToIKpz1.preferredCategory;
-            console.log (userPreferenceCategory);
-
-            // Get the signed in user's preferredFeed
-            var userPreferenceFeed = _FIREBASE.users.ETP9mIUpPZTqGS1st5yp3ToIKpz1.preferredFeed;
-            console.log (userPreferenceFeed);   
-
-            // Set the state to hold the following Information
-            // feedData is set to null as it yet has to be called from the data controller
-            // feedNamesForSelectedCategory are the set of feeds available for the selected category
-            // moodSelected is set to all as default
-
-            this.state = {feedData:null, categorySelected: userPreferenceCategory, feedNamesForSelectedCategory: _FIREBASE[userPreferenceCategory] ,feedSelected:userPreferenceFeed , moodSelected: "all"};
-
-            // this.changeCategory = this.changeCategory.bind(this);
-
-            this.changeFeed = this.changeFeed.bind(this);
-
-            // this.changeMood= this.changeMood.bind(this);
-
-            // this.fetchData= this.fetchData.bind(this);
-
-            //fetchData ();
-
-    }
-    
-    //Should change the list of values in the drop down menu
-    changeCategory (categoryValue) {
-
-
-        this.setState({ categorySelected: categoryValue });        
-
-    }
-
-    changeFeed () {
-
-        //Should change the article feed in th the card groups
-
-        //Should use fetchData to get the latest object of news articles
-        //Check if there are any new news articles by matching to the unique ids
-        //If there are new articles add them to the unique id list and the data base otherwise do nothing 
-        //(remember to add keys - city,happy,sad,angry,wow,neutral)
-
-        //Set the feedData state to call articles 
-
-    }
-
-
-    render () {
-        console.log (this.state.feedNamesForSelectedCategory)
-        return (<main>
-                    <HorizontalNavigation selectedCategory= {this.categorySelected} selectedFeed = {this.feedSelected} changeCategory={this.changeCategory} changeFeed = {this.changeCategory} />
-                </main>
-                );
-    }
 }
-
-class HorizontalNavigation extends React.Component {
-    
-    constructor(props) {
-
-        super(props)
-
-        this.state = {};
-
-    }
-
-
-    render () {
-        return (
-            <div className="horizontal_nav_menu">
-            
-            </div> 
-        );
-    }
-} 
-
-class CardGroup extends React.Component {
-    
-    constructor(props) {
-
-        super(props)
-
-        this.state = {};
-
-    }
-
-
-    render () {
-        return (null);
-    }
-} 
-
-class Card extends React.Component {
-    
-    constructor(props) {
-
-        super(props)
-
-        this.state = {};
-
-    }
-
-
-    render () {
-        return (null);
-    }
-} 
-
-
-export default NewsFeed; 
