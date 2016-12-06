@@ -17,6 +17,38 @@ import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './join';
 import SignInForm from './login';
 
+//For animation of the navigation bar
+//Sourced from http://bootsnipp.com/user/snippets/45GQR
+$(document).ready(function () {
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+        isClosed = false;
+
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+        if (isClosed === true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+});
+
+
 //Class which generates the entire application being created
 class App extends React.Component {
 
@@ -78,36 +110,90 @@ class App extends React.Component {
         else {
             // content = (this.props.children);
             // //content = <p>hey</p>;
-            navbar = <ul>
-                <li><a><Link to="/newsfeed" activeClassName="activeLink">News Feed</Link></a></li>
-                <li><Link to="/stats" activeClassName="activeLink">Stats</Link></li>
-                <li><Link to="/about" activeClassName="activeLink">About</Link></li>
-                </ul>;
-        }
+            
+        navbar = <nav className="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                    <ul className="nav sidebar-nav">
+                        <li className="sidebar-brand">
+                            <Link to="/newsfeed" activeClassName="activeLink"  className="navOption" >
+                            React News </Link>
+                        </li>
+                        <span> Sort News Feed by </span>
+                        <li>
+                            <Link className="navOption" >
+                            All</Link>
+                        </li>
+                        <li>
+                            <Link className="navOption" >
+                            Happy</Link>
+                        </li>
+                        <li>
+                            <Link className="navOption" >
+                            Wow
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="navOption" >
+                            Neutral</Link>
+                        </li>
+                        <li>
+                            <Link className="navOption" >
+                            Sad </Link>
+                        </li>
+                        <li>
+                            <Link to="/stats" activeClassName="activeLink"  className="navOption" >
+                            Angry </Link>
+                        </li>
+                        <span> Other Stuff </span>
+                        <li>
+                            <Link to="/stats" activeClassName="activeLink"  className="navOption" >
+                            Statistics </Link>
+                        </li>
+                        <li>
+                            <Link to="/newsfeed" activeClassName="activeLink"  className="navOption" >
+                            About Us </Link>
+                        </li>
+                        <li onClick={() =>
+                            this.signOut()}>
+                            <Link className="navOption" >
+                            Sign Out {firebase.auth().currentUser.displayName} </Link>
+                        </li>
+                    </ul>
+                    </nav>;
+             }
 
 
         return (
             <div id="wrapper">
 
 
-                <div className="container" role="banner" >
+               <div>
 
-
-                    <h1>Better Than Reuters</h1>
-                    <p>Come react with people</p>
+                    
                     {this.state.userId &&
-                        <div>
-                            <div className="logout">
-                                <button className="btn btn-warning signout" onClick={() => this.signOut()}>Sign out {firebase.auth().currentUser.displayName}</button>
-                            </div>
+                            <div>
                             {navbar}
-                        </div>
+                            
+                            </div>
+                                
                     }
+                    <div id="page-content-wrapper">
+                    <div>
+                    <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
+                            <div className="hamburgerSize">
+                            <span className="hamb-top" />
+                            <span className="hamb-middle" />
+                            <span className="hamb-bottom" />
+                            </div>
+                    </button>
 
-                </div>
-                <div className="col-xs-9">
+
+                    </div>
+                    </div>
+                    
                     {this.props.children}
+                
                 </div>
+            
             </div>
         );
     }
@@ -123,9 +209,81 @@ export class NewsFeed extends React.Component {
     }
       
     render() {
-        return <NewsFeed />
-    }
-}
+        return (
+        
+             <div>
+                            <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
+                            <div className="hamburgerSize">
+                            <span className="hamb-top" />
+                            <span className="hamb-middle" />
+                            <span className="hamb-bottom" />
+                            </div>
+                            </button>
+
+                            <div className="drop_down_menu">
+                            <span className = "selectCategory"> 
+
+                            <span>
+
+                            <button className = "flat-butt flat-butt-category" onClick={() => this.setState({ categoriesopen: !this.state.categoriesopen })}> 
+                            General <i className="fa fa-sort-desc" aria-hidden="true"></i>
+                            </button>
+
+                            <Collapse in={this.state.categoriesopen} className="dropDownOptions scroller">
+
+                            <div className="dropDownCategoryTitle">
+
+                            <div className="categoryList">Categories </div> 
+                            <div>
+                              <ul>
+                              <li>General</li>
+                              <li>Sports</li>
+                              <li>Technology</li>
+                              <li>Entertainment</li>
+                              <li>Music</li>
+                              <li>Science and Nature</li>
+                              </ul>
+                            </div>
+                            <div className="categoryList">Location</div> 
+                            <div>
+                              <ul >
+                              <li>Australia</li>
+                              <li>India</li>
+                              <li>Germany</li>
+                              <li>Italy</li>
+                              <li>United Kingdom</li>
+                              <li>United States</li>
+                              </ul>
+                            </div>
+
+
+
+                            </div>
+                            </Collapse>
+
+                            <button className = "flat-butt flat-butt-category" onClick={() => this.setState({ feedNamesopen: !this.state.feedNamesopen })}> 
+                            BBC <i className="fa fa-sort-desc" aria-hidden="true"></i>
+                            </button>
+
+                            <Collapse in={this.state.feedNamesopen} className="dropDownOptions scroller">
+
+                            <div className="dropDownCategoryTitle">
+
+                            FeedNames 
+
+                            <div></div>
+
+                            </div>
+                            </Collapse>
+
+                            </span>
+                            </span> 
+                        
+                            </div>
+            </div>
+
+        );
+}}
 
 export class Stats extends React.Component {
 

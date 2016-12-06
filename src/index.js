@@ -13,6 +13,8 @@ import './css/animate.css';
 import './css/Flat-UI-master/dist/css/flat-ui.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
+//import require bootstrap components such as button, well, collapse
+import { Button, Well, Collapse } from 'react-bootstrap';
 
 // Initialize Firebase
 var config = {

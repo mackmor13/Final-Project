@@ -6,10 +6,19 @@ import './css/index.css';
 import './css/card.css';
 import './css/animate.css';
 import './css/Flat-UI-master/dist/css/flat-ui.css';
+//import require bootstrap components such as button, well, collapse
+import { Button, Well, Collapse } from 'react-bootstrap';
 
 class NewsFeed extends React.Component {
+        constructor(props) {
+
+        super(props)
+
+        this.state = {};
+
+    }
     render () {
-        return (<div>Yo bro</div>);
+        return (   <div> </div> );
     }
 }
 
