@@ -1265,8 +1265,7 @@ var _SELECT_OPTIONS = {
   }, {
     "value": "technology",
     "label": "Technology"
-  }],
-  "countries": [{
+  }, { 
     "value": "Australia",
     "label": "Australia"
   }, {
@@ -1627,7 +1626,7 @@ class NewsFeed extends React.Component {
                 console.log (sortBysAvailable);
                 this.fetchData (feedSelected,sortBysAvailable);
 
-        });
+                });
 
             }
             else {
@@ -1685,11 +1684,11 @@ class NewsFeed extends React.Component {
 
             .then(function (data) {
                 thisComponent.addArticlesToFirebase(data);
-                //console.log (data);
-                //console.log (data.articles);
+                console.log (data);
+                console.log (data.articles);
             })
             //.catch((err) => this.setState({ newFeedData: []},  ));
-            //console.log(this.state.feed);
+            console.log(this.state.feed);
 
     }
 
@@ -1738,7 +1737,7 @@ class NewsFeed extends React.Component {
             url = JSON.stringify(url).replace(/\W/g, '');
             //Join the title and publishedAt variable to create an id for an article
             var idForOneArticle = url;
-            //console.log (idForOneArticle);
+            console.log (idForOneArticle);
 
             updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
 
@@ -1796,47 +1795,30 @@ class HorizontalNavigation extends React.Component {
 
         super(props)
 
-        this.state = {categorySelected:this.props.selectedCategory};
+        this.state = {categorySelected:''};
 
-        this.logChangeCategory = this.logChangeCategory.bind(this);
+        this.changeCategory = this.changeCategory.bind(this);
         
-        this.logChangeFeed = this.logChangeFeed.bind(this);
+        this.changeFeed = this.changeFeed.bind(this);
 
     }
 
-    logChangeFeed(selectedFeed) {
-        
-        //console.log("Selected: " + selectedFeed.label);
+    changeFeed(selectedFeed) {
         this.setState ({feedSelected:selectedFeed.label});
-        console.log (this.state.feedSelected);
-
-        // THe first value which gets clicked gets loaded when you make your second click 
     }
 
-    logChangeCategory(selectedCategory) {
+    changeCategory(selectedCategory) {
         
-        //console.log("Selected: " + selectedCategory.label);
-        
-        this.setState ({categorySelected:selectedCategory.label});
-        
-        // Extract newsfeeds for that category
 
-        var feedIDsForSelectedCategory = _NEWS_FEEDS_INFORMATION.categories[selectedCategory.value];
-        console.log (feedIDsForSelectedCategory);
+        this.setState ({categorySelected:selectedCategory.value});
 
-        var feedIDsArray = Object.keys(feedIDsForSelectedCategory);
-        console.log (feedIDsArray);
+        var names = Object.keys(_NEWS_FEEDS_INFORMATION.categories[selectedCategory.value])
 
-        var feedOptions = feedIDsArray.map ((feedID) => {
-            
-            var name = _NEWS_FEEDS_INFORMATION.sources[feedID].name;
-
-            return {value:feedID,label:name}
-            /* */
-        });
-
-        this.setState({feedsForCategory:feedOptions});
-
+        var options = [];
+        names.forEach(function (name){
+          options.push({value:name, label:name})
+        }) 
+        this.setState({feedsForCategory:options})
     }
 
 
@@ -1844,27 +1826,15 @@ class HorizontalNavigation extends React.Component {
 
     render () {
          
-        var Select = require('react-select');
-        
-        // Extract countries and categories in array format
-        var countryOptions = _SELECT_OPTIONS.countries;
-        var categoryOptions = _SELECT_OPTIONS.categories;       
-
-        //adding countries to categories
-        var allCategoryOptions = countryOptions.concat(categoryOptions);
-        
-        //console.log (categories);
-
-        // Next make the value displayed for category and feed the selected category and feed
 
         return (
             <div className="horizontal_nav_menu">
                     
                     <span className="selectCategory">
 
-                        <Select name="form-field-name" value={this.state.categorySelected} options={allCategoryOptions} onChange={this.logChangeCategory} className="select"/>
+                        <Select name="form-field-name" resetValue='' value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select"/>
                         
-                        <Select name="form-field-names" value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.logChangeFeed} className="selector"/>
+                        <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector"/>
                     
                     </span>
 
@@ -1872,7 +1842,6 @@ class HorizontalNavigation extends React.Component {
         );
     }
 } 
-
 class CardGroup extends React.Component {
     
     constructor(props) {
