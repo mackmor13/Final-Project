@@ -42,14 +42,12 @@ class CongressDialog extends React.Component {
   handleOpenDialog() {
     this.setState({
       openDialog: true
-     // styleCard: "Dialog"
     });
   }
 
   handleCloseDialog() {
     this.setState({
       openDialog: false,
-     // styleCard: "hi"
      contactForm:[]
     });
   }
@@ -120,4 +118,5 @@ class SearchTypes extends React.Component {
 }
 
 
-export default App; //make this class available to other files (e.g., index.js)
+
+export default App; //make this class available to other files (e.g., index.js) 

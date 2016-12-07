@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import App from './App';
+import App, {NewsFeed, Stats, About} from './App';
+import Join from './join'
+import Login from './login'
 import firebase from 'firebase';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyDADRuBNTKL9k68ezcRssLOsSrWY8maeqE",
-  authDomain: "info-343a-final.firebaseapp.com",
-  databaseURL: "https://info-343a-final.firebaseio.com",
-  storageBucket: "info-343a-final.appspot.com",
-  messagingSenderId: "327840590763"
+  apiKey: "AIzaSyAfwrtHv5IjhHux7o19pk5C9LR5gIqaKhs",
+  authDomain: "reactnews-51fe8.firebaseapp.com",
+  databaseURL: "https://reactnews-51fe8.firebaseio.com",
+  storageBucket: "reactnews-51fe8.appspot.com",
+  messagingSenderId: "620524973308"
 };
+
 firebase.initializeApp(config);
 
 ReactDOM.render(
@@ -21,6 +24,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRoute component={App} />
     </Route>
-  </Router>,
-  document.getElementById('root')
+  </Router>,  document.getElementById('root')
 );
+
+firebase.auth();

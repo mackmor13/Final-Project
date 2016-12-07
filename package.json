@@ -27,6 +27,7 @@
     "cheerio": "^0.22.0",
     "firebase": "^3.6.2",
     "jquery": "^3.1.1",
+    "js-md5": "^0.4.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-transition-group": "^15.4.1",

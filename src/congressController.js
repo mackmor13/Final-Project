@@ -31,6 +31,4 @@ var controller = {
     },      
   }
 
-
-
 export default controller; 
