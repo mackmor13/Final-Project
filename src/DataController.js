@@ -1,6 +1,6 @@
 'use strict';
 
-import 'whatwg-fetch'; 
+import 'whatwg-fetch';
 
 
 var apiKey = "d54e68d87dd145c48d26c2a6287b4e89";
@@ -15,7 +15,7 @@ var controller = {
     var uri = baseApiUrl + resource + '?q=' + searchQuery + '&type=artist&api_key=' + apiKey;
     console.log('fetching from', uri);
 
-    return fetch(uri) 
+    return fetch(uri)
       .then(function (result) { return result.json(); })
   },
 
