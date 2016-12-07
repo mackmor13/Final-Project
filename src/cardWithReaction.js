@@ -48,7 +48,7 @@ class MessageItem extends React.Component {
 
 
   render() {
-	var allEmotions = {"happy":0, "sad":0, "wow":0, "neutral":0, "angry":0}//TAKE THIS ARRAY TO RENDER COUNTS
+	var allEmotions = {happy:0, sad:0, wow:0, neutral:0, angry:0}//TAKE THIS ARRAY TO RENDER COUNTS
 	Object.keys(allEmotions).forEach(function (emotion) {
     	var reactionRef = firebase.database().ref('messages/' + this.props.message.key + '/'+emotion);
 		if(reactionRef[emotion] != null) {
@@ -57,19 +57,19 @@ class MessageItem extends React.Component {
 	})
 
 	var max = 0;
-	var currentColor = 'teal';
-	var colors = {"happy": "yellow", "sad": "blue", "wow": "purple", "neutral": "teal", "angry": "red"}	
+	var currentEmotion = 'neutral';
+	var colors = {happy: "yellow", sad: "blue", wow: "purple", neutral: "teal", angry: "red"}	
 	Object.keys(allEmotions).forEach(function (emotion) {
 		if(allEmotions.emotion === max) {
-			currentColor = 'teal';
+			currentEmotion = 'neutral';
 		} else if(allEmotions.emotion > max){
 			max = allEmotions.emotion;
-			currentColor = colors.emotion;
+			currentEmotion = emotion;
 		}
 	})
 
-  var articleColorRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/color');
-  articleColorRef.set(currentColor);
+  var articleEmotionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/emotion');
+  articleEmotionRef.set(currentEmotion);
 
   
     // if (this.props.message.likes) {
@@ -79,7 +79,7 @@ class MessageItem extends React.Component {
     // }
 
     return (
-      <div className={"message-box " + currentColor}>
+      <div className={"message-box " + colors[currentEmotion]}>
 
         <div className="message">{this.props.message.text}</div>
 
