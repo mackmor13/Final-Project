@@ -42,7 +42,7 @@ var _RSS_FEEDS = {
     '7': {title: 'title', description: 'description', imgurl: 'url', link: 'link', date: 'timestamp', location: 'location', wow: 0, happy: 0, neutral: 0, sad: 0, angry: 0},
     '8': {title: 'title', description: 'description', imgurl: 'url', link: 'link', date: 'timestamp', location: 'location', wow: 0, happy: 0, neutral: 0, sad: 0, angry: 0},
     '9': {title: 'title', description: 'description', imgurl: 'url', link: 'link', date: 'timestamp', location: 'location', wow: 0, happy: 0, neutral: 0, sad: 0, angry: 0},
-    '10': {title: 'title', description: 'description', imgurl: 'url', link: 'link', date: 'timestamp', location: 'location', wow: 0, happy: 0, neutral: 0, sad: 0, angry: 0}
+    '10': {title: 'title', description: 'description', imgurl: 'url', link: 'link', date: 'timestamp', location: 'location', wow: 0, happy: 0, neutral: 0, sad: 0, angry: 0},
    
     users:  {   hash1: {username: 'boJack', email: 'horse@man.com'},
                 hash2: {username: 'boMack', email: 'jorse@man.com'},

@@ -3,7 +3,7 @@ import controller from './congressController';
 //import ReactMDL from 'react-mdl';
 import { Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl'; 
 import Mailto from 'react-mailto';
-
+import './MorgansTamp.css';
 
 //load LazyLoad for this module for generating the cards for each news article
 
@@ -21,7 +21,6 @@ import firebase from 'firebase';
 import cheerio from 'cheerio';
 import ReactHtmlParser from 'react-html-parser';
 import _RSS_FEEDS from './fb_obj_design'; 
-import './MorgansTamp.css';
 
 //For animation of the navigation bar
 //Sourced from http://bootsnipp.com/user/snippets/45GQR
@@ -123,7 +122,9 @@ class App extends React.Component {
         
         
         //please download data
-        feednami.load(_RSS_URLS[this.state.category], this.myCallbackFunction);       
+        feednami.load(_RSS_URLS[this.state.category], this.myCallbackFunction);
+        // this.state = {contactForm:[]};
+        
     }
 
      
@@ -214,42 +215,45 @@ class CongressDialog extends React.Component {
         var thisComponent = this;
         controller.CongressInfo(zip)
         .then(function(data){
-            if(data.results.length === 0) {
-                alert('Please enter a valid Zip code')
-            }
+            console.log(data.results)
             thisComponent.setState({contactForm:data.results})
     })
+    .catch( (err) => this.setState({contactForm:[]}));
  }
+
+ getRepresentatives(){
+     this.state.contactForm.forEach(function(element) {
+         console.log("element" + element)
+         return element.last_name;
+     });
+ } 
 
   handleOpenDialog() {
     this.setState({
       openDialog: true
-     // styleCard: "Dialog"
     });
   }
 
   handleCloseDialog() {
     this.setState({
-      openDialog: false,
-     // styleCard: "hi"
-     contactForm:[]
+      openDialog: false
     });
   }
 
   render() {
    var  Representative = this.state.contactForm.map(function(element) {
-        return <div>
+       console.log(element)
+       return <div>
        <Image className="RepImage" src={controller.GetPictureUrl(element)} alt="picture for {element.last_name}"/>
        <Mailto email={element.oc_email} obfuscate={true}>
-      {element.first_name} {element.last_name}</Mailto></div>;      
+      {element.first_name} {element.last_name}</Mailto></div>;
    })
     return (
-      
       <div>
         <Button onClick={this.handleOpenDialog}>Show Dialog</Button>
-        <Dialog id="Dialog"  open={this.state.openDialog}>
+        <Dialog id="Dialog" open={this.state.openDialog}>
         <Button id="close" onClick={this.handleCloseDialog}>&times;</Button>
-          <DialogTitle><h1>Email your Representative</h1></DialogTitle>
+          <DialogTitle>Find your Representative</DialogTitle>
           <DialogContent id="DialogContent">
             <SearchTypes searchFunction={this.fetchData} />
             <p>{Representative}</p>
@@ -267,7 +271,6 @@ class SearchTypes extends React.Component {
     this.state = {value:''}
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
   
   // Gets what the user typed
@@ -278,22 +281,16 @@ class SearchTypes extends React.Component {
   // Returns what the user typed
   handleClick(event) {
     this.props.searchFunction(this.state.value);
-    this.setState({value:''})
-  }
-
-  onSubmit(event) {
-      event.preventDefault();
-      this.handleClick();
   }
   
   //Search function that brings up a modal 
   render() {
     return (
-      <Form inline id="search" onSubmit={this.onSubmit}>
+      <Form inline id="search">
         <InputGroup>
-          <FormControl type="text" value={this.state.value} placeholder="Enter your Zip code..." onChange={this.handleChange} />
+          <FormControl type="text" placeholder="Enter your Zip code..." onChange={this.handleChange} />
            <InputGroup.Button>
-            <Button onClick={this.handleClick} type="button"><Glyphicon glyph="search" aria-label="Search" /></Button>
+            <Button onClick={this.handleClick}  type="button"><Glyphicon glyph="search" aria-label="Search" /></Button>
           </InputGroup.Button>
         </InputGroup>
       </Form>
