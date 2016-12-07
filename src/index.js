@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import App, {NewsFeed, Stats, About} from './App';
-import Join from './join'
-import Login from './login'
 import firebase from 'firebase';
 
 import 'bootstrap/dist/css/bootstrap.css';
