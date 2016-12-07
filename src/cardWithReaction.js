@@ -67,6 +67,11 @@ class MessageItem extends React.Component {
 			currentColor = colors.emotion;
 		}
 	})
+
+  var articleColorRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/color');
+  articleColorRef.set(currentColor);
+
+  
     // if (this.props.message.likes) {
     //   likeCount = Object.keys(this.props.message.likes).length;
     //   if (this.props.message.likes[firebase.auth().currentUser.uid])
