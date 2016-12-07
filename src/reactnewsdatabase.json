@@ -1205,12 +1205,6 @@
       "small" : "http://i.newsapi.org/usa-today-s.png"
     }
   },
-  "users" : {
-    "ETP9mIUpPZTqGS1st5yp3ToIKpz1" : {
-      "preferredCategory" : "India",
-      "preferredFeed" : "thehindu"
-    }
-  },
   "wiredde" : {
     "category" : "technology",
     "country" : "Germany",
