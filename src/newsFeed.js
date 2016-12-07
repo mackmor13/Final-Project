@@ -1882,30 +1882,33 @@ class CardGroup extends React.Component {
     }
 } 
 
-class Card extends React.Component {
-    
-    constructor(props) {
+class Cards extends React.Component {
 
-        super(props)
-
-        this.state = {};
-
+    render() {
+         var articlesRef = firebase.database().ref('articles');
+        var articlesArray = [];
+        articlesRef.on('value', (snapshot) =>{
+            snapshot.forEach(function (child){
+                var article = child.val();
+                article.key = child.key;
+                articlesArray.push(article);
+            })
+        })
+        return <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
+                        <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>Welcome</CardTitle>
+                        <CardText>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Mauris sagittis pellentesque lacus eleifend lacinia...
+                        </CardText>
+                        <CardActions border>
+                            <Button colored>Get Started</Button>
+                        </CardActions>
+                        <CardMenu style={{color: '#fff'}}>
+                            <IconButton name="share" />
+                        </CardMenu>
+                   </Card>
     }
-
-
-    render () {
-
-        var timeStamp = this.props.articleInfo.publishedAt;
-        var d = new Date("2016-12-07T00:02:46Z");
-        var dateforMonth = d.getDate();
-        var month = d.getMonth();
-        var year = d.getFullYear();
-        var completeDate = dateforMonth + "|" + month + "|" + year;
-        console.log (completeDate);
-
-        return (null);
-    }
-} 
+}
 
 
 export default NewsFeed; 

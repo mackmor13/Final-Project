@@ -16,6 +16,7 @@ import firebase from 'firebase';
 //import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './join';
 import SignInForm from './login';
+import { Header, Drawer, Navigation, Layout } from 'react-mdl';
 //import Select from 'react-select';
 //import './css/selection.css';
 
@@ -71,97 +72,48 @@ class App extends React.Component {
 
     render() {
 
-
-
-        var content = null;
-        var navbar = null;
-        if (!this.state.userId) {
-            // content = <SignUpForm />;
-            navbar = null;
-        }
-        else {
-            // content = (this.props.children);
-            // //content = <p>hey</p>;
-            
-        navbar = <nav className="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-                    <ul className="nav sidebar-nav">
-                        <li className="sidebar-brand">
-                            <Link to="/newsfeed" activeClassName="activeLink"  className="navOption" >
-                            React News </Link>
-                        </li>
-                        <span> Sort News Feed by </span>
-                        <li>
-                            <Link className="navOption" >
-                            All</Link>
-                        </li>
-                        <li>
-                            <Link className="navOption" >
-                            Happy</Link>
-                        </li>
-                        <li>
-                            <Link className="navOption" >
-                            Wow
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="navOption" >
-                            Neutral</Link>
-                        </li>
-                        <li>
-                            <Link className="navOption" >
-                            Sad </Link>
-                        </li>
-                        <li>
-                            <Link to="/stats" activeClassName="activeLink"  className="navOption" >
-                            Angry </Link>
-                        </li>
-                        <span> Other Stuff </span>
-                        <li>
-                            <Link to="/stats" activeClassName="activeLink"  className="navOption" >
-                            Statistics </Link>
-                        </li>
-                        <li>
-                            <Link to="/newsfeed" activeClassName="activeLink"  className="navOption" >
-                            About Us </Link>
-                        </li>
-                        <li onClick={() =>
-                            this.signOut()}>
-                            <Link className="navOption" >
-                            Sign Out {firebase.auth().currentUser.preferredCategory} </Link>
-                        </li>
-                    </ul>
-                    </nav>;
-             }
+        const style = {height: '53rem', position: 'relative'}
 
 
         return (
-                <div id="wrapper">
+                            <div style={style}>
+                                {
+                                <Layout style={{background: 'url(http://eskipaper.com/images/free-city-background-2.jpg) center / cover'}}>                                
+                                <Header transparent title={"React-news"}>
+                                </Header>
+                                <Drawer aria-label="List" title="React-news">
+                                <Navigation>
+                                    <Link aria-label="Main page" to="/newsfeed" activeClassName="activeLink">News</Link>
+                                    <Link aria-label="Main page" to="/emotion/happy" activeClassName="activeLink">Happy</Link>
+                                    <Link aria-label="Main page" to="/emotion/sad" activeClassName="activeLink">Sad</Link>
+                                    <Link aria-label="Main page" to="/emotion/wow" activeClassName="activeLink">Wow</Link>
+                                    <Link aria-label="Main page" to="/emotion/neutral" activeClassName="activeLink">Neutral</Link>
+                                    <Link aria-label="Main page" to="/emotion/angry" activeClassName="activeLink">Angry</Link>
+                                    <Link aria-label="Main page" to="/about" activeClassName="activeLink">About Us</Link>
+                                    <Link aria-label="Main page" to="/stats" activeClassName="activeLink">Statistics</Link>
 
-                    {this.state.userId &&
-                            <div>
-                            {navbar}
+                                    <div className="logout">
+                                    <button aria-label="Logout" className="btn btn-warning" onClick={() => this.signOut()}>Sign out</button>
+                                    </div>
+                                </Navigation>
+                                </Drawer>
 
-                            </div>
+                                <main className="container">
+                                {this.props.children}
+                                </main>
+                            </Layout>
+                            }
+                            {/*!this.state.userId && //for sign in and sign up page
+                            <Layout fixedHeader>
+                                <Header title="KcalS">
+                                </Header>
 
-                        }
+                                <main className="container">
+                                {this.props.children}
+                                </main>
+                            </Layout>*/
+                            }
 
-                        <div id="page-content-wrapper">
-                                    
-                                    <span>
-                                    <button type="button" className="hamburger is-closed" data-toggle="offcanvas">
-                                        <div className="hamburgerSize">
-                                                <span className="hamb-top" />
-                                                <span className="hamb-middle" />
-                                                <span className="hamb-bottom" />
-                                        </div>
-                                    </button>
-                                    </span>
-                                    
-
-
-                                     {this.props.children}
-
-                        </div>
 
                 </div>
             
