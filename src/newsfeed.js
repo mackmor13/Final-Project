@@ -17,172 +17,172 @@ import { Button, Well, Collapse } from 'react-bootstrap';
 var _NEWS_FEEDS_INFORMATION = {
 "categories": {
        "Australia": {
-      "abcnewsau": "abcnewsau",
-      "theguardianau": "theguardianau"
+      "abcnewsau": "abc-news-au",
+      "theguardianau": "the-guardian-au"
     },
     "Germany": {
       "bild": "bild",
-      "dertagesspiegel": "dertagesspiegel",
-      "diezeit": "diezeit",
+      "dertagesspiegel": "der-tagesspiegel",
+      "diezeit": "die-zeit",
       "focus": "focus",
       "gruenderszene": "gruenderszene",
       "handelsblatt": "handelsblatt",
-      "spiegelonline": "spiegelonline",
+      "spiegelonline": "spiegel-online",
       "t3n": "t3n",
-      "wiredde": "wiredde",
-      "wirtschaftswoche": "wirtschaftswoche"
+      "wiredde": "wired-de",
+      "wirtschaftswoche": "wirtschafts-woche"
     },
     "India": {
-      "thehindu": "thehindu",
-      "thetimesofindia": "thetimesofindia"
+      "thehindu": "the-hindu",
+      "thetimesofindia": "the-times-of-india"
     },
     "Italy": {
-      "footballitalia": "footballitalia"
+      "footballitalia": "football-italia"
     },
     "UnitedKingdom": {
-      "bbcnews": "bbcnews",
-      "bbcsport": "bbcsport",
-      "businessinsideruk": "businessinsideruk",
-      "dailymail": "dailymail",
-      "financialtimes": "financialtimes",
-      "fourfourtwo": "fourfourtwo",
+      "bbcnews": "bbc-news",
+      "bbcsport": "bbc-sport",
+      "businessinsideruk": "business-insider-uk",
+      "dailymail": "daily-mail",
+      "financialtimes": "financial-times",
+      "fourfourtwo": "four-four-two",
       "independent": "independent",
       "metro": "metro",
       "mirror": "mirror",
-      "mtvnewsuk": "mtvnewsuk",
-      "skynews": "skynews",
-      "skysportsnews": "skysportsnews",
+      "mtvnewsuk": "mtv-news-uk",
+      "skynews": "sky-news",
+      "skysportsnews": "sky-sports-news",
       "talksport": "talksport",
-      "theeconomist": "theeconomist",
-      "theguardianuk": "theguardianuk",
-      "theladbible": "theladbible",
-      "thesportbible": "thesportbible",
-      "thetelegraph": "thetelegraph"
+      "theeconomist": "the-economist",
+      "theguardianuk": "the-guardian-uk",
+      "theladbible": "the-lad-bible",
+      "thesportbible": "the-sport-bible",
+      "thetelegraph": "the-telegraph"
     },
     "UnitedStates": {
-      "arstechnica": "arstechnica",
-      "associatedpress": "associatedpress",
+      "arstechnica": "ars-technica",
+      "associatedpress": "associated-press",
       "bloomberg": "bloomberg",
-      "businessinsider": "businessinsider",
+      "businessinsider": "business-insider",
       "buzzfeed": "buzzfeed",
       "cnbc": "cnbc",
       "cnn": "cnn",
       "engadget": "engadget",
-      "entertainmentweekly": "entertainmentweekly",
+      "entertainmentweekly": "entertainment-weekly",
       "espn": "espn",
-      "espncricinfo": "espncricinfo",
+      "espncricinfo": "espn-cric-info",
       "fortune": "fortune",
-      "foxsports": "foxsports",
-      "googlenews": "googlenews",
-      "hackernews": "hackernews",
+      "foxsports": "fox-sports",
+      "googlenews": "google-news",
+      "hackernews": "hacker-news",
       "ign": "ign",
       "mashable": "mashable",
-      "mtvnews": "mtvnews",
-      "nationalgeographic": "nationalgeographic",
-      "newscientist": "newscientist",
+      "mtvnews": "mtv-news",
+      "nationalgeographic": "national-geographic",
+      "newscientist": "new-scientist",
       "newsweek": "newsweek",
-      "newyorkmagazine": "newyorkmagazine",
-      "nflnews": "nflnews",
+      "newyorkmagazine": "new-york-magazine",
+      "nflnews": "nfl-news",
       "polygon": "polygon",
       "recode": "recode",
-      "redditrall": "redditrall",
+      "redditrall": "reddit-r-all",
       "reuters": "reuters",
       "techcrunch": "techcrunch",
       "techradar": "techradar",
-      "thehuffingtonpost": "thehuffingtonpost",
-      "thenewyorktimes": "thenewyorktimes",
-      "thenextweb": "thenextweb",
-      "theverge": "theverge",
-      "thewallstreetjournal": "thewallstreetjournal",
-      "thewashingtonpost": "thewashingtonpost",
+      "thehuffingtonpost": "the-huffington-post",
+      "thenewyorktimes": "the-new-york-times",
+      "thenextweb": "the-next-web",
+      "theverge": "the-verge",
+      "thewallstreetjournal": "the-wall-street-journal",
+      "thewashingtonpost": "the-washington-post",
       "time": "time",
-      "usatoday": "usatoday"
+      "usatoday": "usa-today"
     },
     "business": {
       "bloomberg": "bloomberg",
-      "businessinsider": "businessinsider",
-      "businessinsideruk": "businessinsideruk",
+      "businessinsider": "business-insider",
+      "businessinsideruk": "business-insider-uk",
       "cnbc": "cnbc",
-      "diezeit": "diezeit",
-      "financialtimes": "financialtimes",
+      "diezeit": "die-zeit",
+      "financialtimes": "financial-times",
       "fortune": "fortune",
       "handelsblatt": "handelsblatt",
-      "theeconomist": "theeconomist",
-      "thewallstreetjournal": "thewallstreetjournal",
-      "wirtschaftswoche": "wirtschaftswoche"
+      "theeconomist": "the-economist",
+      "thewallstreetjournal": "the-wall-street-journal",
+      "wirtschaftswoche": "wirtschafts-woche"
     },
     "entertainment": {
       "buzzfeed": "buzzfeed",
-      "dailymail": "dailymail",
-      "entertainmentweekly": "entertainmentweekly",
+      "dailymail": "daily-mail",
+      "entertainmentweekly": "entertainment-weekly",
       "mashable": "mashable",
-      "theladbible": "theladbible"
+      "theladbible": "the-lad-bible"
     },
     "gaming": {
       "ign": "ign",
       "polygon": "polygon"
     },
     "general": {
-      "abcnewsau": "abcnewsau",
-      "associatedpress": "associatedpress",
-      "bbcnews": "bbcnews",
+      "abcnewsau": "abc-news-au",
+      "associatedpress": "associated-press",
+      "bbcnews": "bbc-news",
       "bild": "bild",
       "cnn": "cnn",
-      "dertagesspiegel": "dertagesspiegel",
+      "dertagesspiegel": "der-tagesspiegel",
       "focus": "focus",
-      "googlenews": "googlenews",
+      "googlenews": "google-news",
       "independent": "independent",
       "metro": "metro",
       "mirror": "mirror",
       "newsweek": "newsweek",
-      "newyorkmagazine": "newyorkmagazine",
-      "redditrall": "redditrall",
+      "newyorkmagazine": "new-york-magazine",
+      "redditrall": "reddit-r-all",
       "reuters": "reuters",
-      "skynews": "skynews",
-      "spiegelonline": "spiegelonline",
-      "theguardianau": "theguardianau",
-      "theguardianuk": "theguardianuk",
-      "thehindu": "thehindu",
-      "thehuffingtonpost": "thehuffingtonpost",
-      "thenewyorktimes": "thenewyorktimes",
-      "thetelegraph": "thetelegraph",
-      "thetimesofindia": "thetimesofindia",
-      "thewashingtonpost": "thewashingtonpost",
+      "skynews": "sky-news",
+      "spiegelonline": "spiegel-online",
+      "theguardianau": "the-guardian-au",
+      "theguardianuk": "the-guardian-uk",
+      "thehindu": "the-hindu",
+      "thehuffingtonpost": "the-huffington-post",
+      "thenewyorktimes": "the-new-york-times",
+      "thetelegraph": "the-telegraph",
+      "thetimesofindia": "the-times-of-india",
+      "thewashingtonpost": "the-washington-post",
       "time": "time",
-      "usatoday": "usatoday"
+      "usatoday": "usa-today"
     },
     "music": {
-      "mtvnews": "mtvnews",
-      "mtvnewsuk": "mtvnewsuk"
+      "mtvnews": "mtv-news",
+      "mtvnewsuk": "mtv-news-uk"
     },
     "scienceandnature": {
-      "nationalgeographic": "nationalgeographic",
-      "newscientist": "newscientist"
+      "nationalgeographic": "national-geographic",
+      "newscientist": "new-scientist"
     },
     "sport": {
-      "bbcsport": "bbcsport",
+      "bbcsport": "bbc-sport",
       "espn": "espn",
-      "espncricinfo": "espncricinfo",
-      "footballitalia": "footballitalia",
-      "fourfourtwo": "fourfourtwo",
-      "foxsports": "foxsports",
-      "nflnews": "nflnews",
-      "skysportsnews": "skysportsnews",
+      "espncricinfo": "espn-cric-info",
+      "footballitalia": "football-italia",
+      "fourfourtwo": "four-four-two",
+      "foxsports": "fox-sports",
+      "nflnews": "nfl-news",
+      "skysportsnews": "sky-sports-news",
       "talksport": "talksport",
-      "thesportbible": "thesportbible"
+      "thesportbible": "the-sport-bible"
     },
     "technology": {
-      "arstechnica": "arstechnica",
+      "arstechnica": "ars-technica",
       "engadget": "engadget",
       "gruenderszene": "gruenderszene",
-      "hackernews": "hackernews",
+      "hackernews": "hacker-news",
       "recode": "recode",
       "t3n": "t3n",
       "techcrunch": "techcrunch",
       "techradar": "techradar",
-      "thenextweb": "thenextweb",
-      "theverge": "theverge",
-      "wiredde": "wiredde"
+      "thenextweb": "the-next-web",
+      "theverge": "the-verge",
+      "wiredde": "wired-de"
     }
   },
   "sources": {
@@ -1680,12 +1680,13 @@ class NewsFeed extends React.Component {
         }
 
         var thisComponent = this; //work around for scope!
+
         NewsFeedController.searchData(stationID, sortOption)
 
             .then(function (data) {
-                thisComponent.addArticlesToFirebase(data);
                 console.log (data);
-                console.log (data.articles);
+                thisComponent.addArticlesToFirebase(data);
+                //console.log (data.articles);
             })
             //.catch((err) => this.setState({ newFeedData: []},  ));
             console.log(this.state.feed);
@@ -1698,92 +1699,105 @@ class NewsFeed extends React.Component {
     addArticlesToFirebase (articlesData) {
 
         //Array of articles
-        var articles = articlesData.articles;
-        //Name of news feed for which data is being called
-        var source = articlesData.source;
-        //
-        var updates = {};
+        // //Name of news feed for which data is being called
+        // var source = articlesData.source;
+        // //
+        // var updates = {};
 
-        for (var i=0 ; i <articles.length;i++ ) {
+        // for (var i=0 ; i <articles.length;i++ ) {
 
 
-            var oneArticle = articles [i];
+        //     var oneArticle = articles [i];
 
-            //Initializing Emotions for each article
-            oneArticle.happy = 0 ;
-            oneArticle.neutral = 0 ;
-            oneArticle.wow = 0 ;
-            oneArticle.angry = 0;
-            oneArticle.sad = 0;
+        //     //Initializing Emotions for each article
+        //     oneArticle.happy = 0 ;
+        //     oneArticle.neutral = 0 ;
+        //     oneArticle.wow = 0 ;
+        //     oneArticle.angry = 0;
+        //     oneArticle.sad = 0;
 
-            console.log (oneArticle);
-            console.log(i);
+        //     console.log (oneArticle);
+        //     console.log(i);
 
-            //combine the date and title together and remove all special characters
-            //check if that reference already exists in our articleUniqueIDs array
+        //     //combine the date and title together and remove all special characters
+        //     //check if that reference already exists in our articleUniqueIDs array
             
-            //Extract the title for the article and remove special characters from it
-            var title = oneArticle.title;
-            title = title.replace(/\s/g, "_");
-            title =  JSON.stringify(title).replace(/\W/g, '')
+        //     //Extract the title for the article and remove special characters from it
+        //     var title = oneArticle.title;
+        //     title = title.replace(/\s/g, "_");
+        //     title =  JSON.stringify(title).replace(/\W/g, '')
 
-            //Extract the published data and remove special characters from it  
-            var publishedAt = oneArticle.publishedAt;
+        //     //Extract the published data and remove special characters from it  
+        //     var publishedAt = oneArticle.publishedAt;
            
-            publishedAt = publishedAt.replace(/\s/g, "_");
+        //     publishedAt = publishedAt.replace(/\s/g, "_");
 
 
-            var url = oneArticle.url;
-            url = JSON.stringify(url).replace(/\W/g, '');
-            //Join the title and publishedAt variable to create an id for an article
-            var idForOneArticle = url;
-            console.log (idForOneArticle);
+        //     var url = oneArticle.url;
+        //     url = JSON.stringify(url).replace(/\W/g, '');
+        //     //Join the title and publishedAt variable to create an id for an article
+        //     var idForOneArticle = url;
+        //     console.log (idForOneArticle);
 
-            updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
+        //     updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
 
-           // firebase.auth().onAuthStateChanged(user => {
-               // if (user) { 
-        }
+        //    // firebase.auth().onAuthStateChanged(user => {
+        //        // if (user) { 
+        // }
 
 
-        firebase.database().ref("articleUniqueIDs/").once('value').then((snapshot) => {
-            console.log(updates);
+        // firebase.database().ref("articleUniqueIDs/").once('value').then((snapshot) => {
+        //     console.log(updates);
 
-            //For each article key in updates do the following:
-            for(var articleKey in updates){
-                //console.log(article);
+        //     //For each article key in updates do the following:
+        //     for(var articleKey in updates){
+        //         //console.log(article);
 
-                //check if that reference already exists in our articleUniqueIDs array
-                if (snapshot.hasChild(idForOneArticle)) {
+        //         //check if that reference already exists in our articleUniqueIDs array
+        //         if (snapshot.hasChild(idForOneArticle)) {
 
-                    console.log ("do not add");
-                }
+        //             console.log ("do not add");
+        //         }
 
-                //If it does not then do the following 
-                else {
-                    var myObj = {};
-                    myObj[articleKey] = updates[articleKey];
-                    //Add this reference to firebase
-                    //var articles = "articles";
-                    //console.log (oneArticle.title);
-                    //var updates = {};
-                    //updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
-                    firebase.database().ref().update(myObj);
-                    console.log("add");
-                }   
-            }
-        });
+        //         //If it does not then do the following 
+        //         else {
+        //             var myObj = {};
+        //             myObj[articleKey] = updates[articleKey];
+        //             //Add this reference to firebase
+        //             //var articles = "articles";
+        //             //console.log (oneArticle.title);
+        //             //var updates = {};
+        //             //updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
+        //             firebase.database().ref().update(myObj);
+        //             console.log("add");
+        //         }   
+        //     }
+        // });
 
         //Set the feedData state to load articles from firebase
+
+        var articles = articlesData.articles;
+
+        Object.keys(articles).forEach(function (index){
+          var url = articles[index].url;
+          var urlId = JSON.stringify(url).replace(/\W/g, '');
+          var stationName = JSON.stringify(articlesData.source).replace(/\W/g, '')
+          var articlesRef = firebase.database().ref('articles/'+urlId);
+          articlesRef.set(articles[index]);
+          var articleSourceRef = firebase.database().ref(stationName+'/articles/' + urlId);
+          // articles[index].source = articlesData.source;
+          articleSourceRef.set(articles[index])
+        })
+
 
     }
                         
     render () {
-
+        this.fetchData("ars-technica", ['top']) 
         //console.log (this.state.feedNamesForSelectedCategory)
         
         return (<main>
-                    <HorizontalNavigation selectedCategory= {this.state.categorySelected} selectedFeed = {this.state.feedSelected} changeCategory={this.state.changeCategory} changeFeed = {this.state.changeCategory} />
+                    <HorizontalNavigation selectedCategory= {this.state.categorySelected} selectedFeed = {this.state.feedSelected} changeCategory={this.state.changeCategory} changeFeed = {this.state.changeCategory}  fetchData={this.fetchData}/>
                 </main>
                 );
     }
@@ -1801,6 +1815,7 @@ class HorizontalNavigation extends React.Component {
         
         this.changeFeed = this.changeFeed.bind(this);
 
+        this.submit = this.submit.bind(this);
     }
 
     changeFeed(selectedFeed) {
@@ -1816,27 +1831,32 @@ class HorizontalNavigation extends React.Component {
 
         var options = [];
         names.forEach(function (name){
-          options.push({value:name, label:name})
+          options.push({value:name, label:_NEWS_FEEDS_INFORMATION.categories[selectedCategory.value][name]})
         }) 
         this.setState({feedsForCategory:options})
+    }
+
+    submit(event){
+      event.preventDefault();
+      this.props.fetchData(this.state.feedSelected, ['top'])
     }
 
 
 
 
     render () {
-         
+
 
         return (
             <div className="horizontal_nav_menu">
-                    
-                    <span className="selectCategory">
+                   <div className="selectCategory"> 
 
                         <Select name="form-field-name" resetValue='' value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select"/>
                         
                         <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector"/>
                     
-                    </span>
+                        <Button onClick={this.submit}>Filter</Button>
+                     </div> 
 
             </div> 
         );
