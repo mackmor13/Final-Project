@@ -1,18 +1,19 @@
 {
   "name": "finalProject",
-  "author": "Jared Praino, Yuyue Zhu, Morgan Mackaay, Zoshua Colah", 
- "homepage": "https://mackmor13.github.io/finalProject/build",
+  "author": "Jared Praino, Yuyue Zhu, Morgan Mackaay, Zoshua Colah",
+  "homepage": "https://mackmor13.github.io/finalProject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "react-scripts": "0.7.0"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build&&gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
