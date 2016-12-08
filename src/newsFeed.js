@@ -10,9 +10,9 @@ import Select from 'react-select';
 //import './css/selection.css';
 import NewsFeedController from './newsFeedDataController.js';
 
-//import require bootstrap components such as button, well, collapse
-import { Button, Well, Collapse } from 'react-bootstrap';
-import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton} from 'react-mdl';
+import { Well, Collapse } from 'react-bootstrap';
+import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton, Button} from 'react-mdl';
+import EmailButton from "./EmailButton.js";
 
 //Options Object for Select 
 var _NEWS_FEEDS_INFORMATION = {
@@ -1796,7 +1796,7 @@ class HorizontalNavigation extends React.Component {
                         
                         <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector"/>
                     
-                        <Button onClick={this.submit}>Filter</Button>
+                        <Button raised onClick={this.submit}>Filter</Button>
                    </div> 
                    {this.state.search &&
                      <Grid>
@@ -1812,7 +1812,7 @@ class HorizontalNavigation extends React.Component {
 class CardItem extends React.Component {
     likeMessage(emotion) {
     /* Access the message in the firebase and add this user's name */
-      var reactionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/'+emotion);
+      var reactionRef = firebase.database().ref('articles/' + this.props.article.url + '/'+emotion);
 
       //toggle logic
       var userId = firebase.auth().currentUser.uid
@@ -1838,19 +1838,26 @@ class CardItem extends React.Component {
 
 
     render() {
-        return <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-                        <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>Welcome</CardTitle>
+        const style = {
+          color: '#fff', 
+          height: '176px', 
+          background: 'url('+ this.props.article.urlToImage+') center / cover'}
+
+        
+
+        return (<Card shadow={0} >
+                        <CardTitle style={style}>{this.props.article.title}</CardTitle>
                         <CardText>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Mauris sagittis pellentesque lacus eleifend lacinia...
+                           {this.props.article.description}
                         </CardText>
                         <CardActions border>
                             <Button colored>Get Started</Button>
                         </CardActions>
                         <CardMenu style={{color: '#fff'}}>
-                            <IconButton name="share" />
+                            <EmailButton />
                         </CardMenu>
                    </Card>
+        )
     }
 }
 
