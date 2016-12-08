@@ -18,12 +18,10 @@
     "url": "git+https://github.com/mackmor13/Final-Project.git"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mackmor13/Final-Project/issues"
   },
-  "homepage": "https://github.com/mackmor13/Final-Project#readme",
   "dependencies": {
     "array-flatten": "^2.1.0",
     "firebase": "^3.6.2",
