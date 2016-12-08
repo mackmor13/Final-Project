@@ -1,7 +1,7 @@
 {
   "name": "finalProject",
   "author": "Jared Praino, Yuyue Zhu, Morgan Mackaay, Zoshua Colah", 
- "homepage": "https://info343-au16.github.io/mackmor13/finalProject/build",
+ "homepage": "https://mackmor13.github.io/finalProject/build",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
