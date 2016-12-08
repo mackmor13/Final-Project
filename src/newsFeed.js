@@ -1768,30 +1768,30 @@ class HorizontalNavigation extends React.Component {
 
 // forms individual card items
 class CardItem extends React.Component {
-  likeMessage(emotion) {
-    /* Access the message in the firebase and add this user's name */
-    var reactionRef = firebase.database().ref('articles/' + this.props.key + '/' + emotion);
+  // likeMessage(emotion) {
+  //   /* Access the message in the firebase and add this user's name */
+  //   var reactionRef = firebase.database().ref('articles/' + this.props.key + '/' + emotion);
 
-    //toggle logic
-    var userId = firebase.auth().currentUser.uid
-    var reactionObj = this.props.message;
-    var allEmotions = [
-      "happy", "sad", "wow", "neutral", "angry"
-    ]
-    var emotionIndex = allEmotions.indexOf(emotion)
-    allEmotions = allEmotions.splice(emotionIndex, 1)
-    if (reactionObj[emotion] && reactionObj[emotion][userId]) {
-      reactionObj[emotion][userId] = null;
-    }
-    else {
-      reactionObj[emotion][userId] = true;
-      allEmotions.forEach(function (otherEmotion) {
-        reactionObj[otherEmotion][userId] = null;
-      })
-    }
+  //   //toggle logic
+  //   var userId = firebase.auth().currentUser.uid
+  //   var reactionObj = this.props.message;
+  //   var allEmotions = [
+  //     "happy", "sad", "wow", "neutral", "angry"
+  //   ]
+  //   var emotionIndex = allEmotions.indexOf(emotion)
+  //   allEmotions = allEmotions.splice(emotionIndex, 1)
+  //   if (reactionObj[emotion] && reactionObj[emotion][userId]) {
+  //     reactionObj[emotion][userId] = null;
+  //   }
+  //   else {
+  //     reactionObj[emotion][userId] = true;
+  //     allEmotions.forEach(function (otherEmotion) {
+  //       reactionObj[otherEmotion][userId] = null;
+  //     })
+  //   }
 
-    reactionRef.set(reactionObj)
-  }
+  //   reactionRef.set(reactionObj)
+  // }
 
 
 
@@ -1802,28 +1802,28 @@ class CardItem extends React.Component {
       background: 'url(' + this.props.article.urlToImage + ') center / cover'
     }
 
-    var allEmotions = { happy: 0, sad: 0, wow: 0, neutral: 0, angry: 0 }//TAKE THIS ARRAY TO RENDER COUNTS
-    Object.keys(allEmotions).forEach(function (emotion) {
-      var reactionRef = firebase.database().ref('messages/' + this.props.message.key + '/' + emotion);
-      if (reactionRef[emotion] != null) {
-        allEmotions.emotion = Object.keys(reactionRef[emotion]).length;
-      }
-    })
+    // var allEmotions = { happy: 0, sad: 0, wow: 0, neutral: 0, angry: 0 }//TAKE THIS ARRAY TO RENDER COUNTS
+    // Object.keys(allEmotions).forEach(function (emotion) {
+    //   var reactionRef = firebase.database().ref('messages/' + this.props.message.key + '/' + emotion);
+    //   if (reactionRef[emotion] != null) {
+    //     allEmotions.emotion = Object.keys(reactionRef[emotion]).length;
+    //   }
+    // })
 
-    var max = 0;
-    var currentEmotion = 'neutral';
-    var colors = { happy: "yellow", sad: "blue", wow: "purple", neutral: "teal", angry: "red" }
-    Object.keys(allEmotions).forEach(function (emotion) {
-      if (allEmotions.emotion === max) {
-        currentEmotion = 'neutral';
-      } else if (allEmotions.emotion > max) {
-        max = allEmotions.emotion;
-        currentEmotion = emotion;
-      }
-    })
+    // var max = 0;
+    // var currentEmotion = 'neutral';
+    // var colors = { happy: "yellow", sad: "blue", wow: "purple", neutral: "teal", angry: "red" }
+    // Object.keys(allEmotions).forEach(function (emotion) {
+    //   if (allEmotions.emotion === max) {
+    //     currentEmotion = 'neutral';
+    //   } else if (allEmotions.emotion > max) {
+    //     max = allEmotions.emotion;
+    //     currentEmotion = emotion;
+    //   }
+    // })
 
-    var articleEmotionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/emotion');
-    articleEmotionRef.set(currentEmotion);
+    // var articleEmotionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/emotion');
+    // articleEmotionRef.set(currentEmotion);
 
 
     // provides emoji buttons for five emotions: happy, sad, neutral, wow, angry
