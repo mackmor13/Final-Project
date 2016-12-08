@@ -1,23 +1,16 @@
 import React from 'react';
 import firebase from 'firebase';
 import { Link, hashHistory } from 'react-router';
-//load CSS for this module
-// import './css/index.css';
-// import './css/card.css';
-// import './css/animate.css';
-// import './css/Flat-UI-master/dist/css/flat-ui.css';
 import Select from 'react-select';
-//import './css/selection.css';
 import NewsFeedController from './newsFeedDataController.js';
-
 import { Well, Collapse } from 'react-bootstrap';
-import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton, Button} from 'react-mdl';
+import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton, Button } from 'react-mdl';
 import EmailButton from "./EmailButton.js";
 
 //Options Object for Select 
 var _NEWS_FEEDS_INFORMATION = {
-"categories": {
-       "Australia": {
+  "categories": {
+    "Australia": {
       "abcnewsau": "abc-news-au",
       "theguardianau": "the-guardian-au"
     },
@@ -1266,7 +1259,7 @@ var _SELECT_OPTIONS = {
   }, {
     "value": "technology",
     "label": "Technology"
-  }, { 
+  }, {
     "value": "Australia",
     "label": "Australia"
   }, {
@@ -1569,296 +1562,300 @@ var _SELECT_OPTIONS = {
   }
 }
 
-/*var categories = Object.keys(_NEWS_FEEDS_INFORMATION.Countries);
-
-console.log (categories);
-
-var categoryOptions = [];
-
-for (var i = 0; i <categories.length; i++) {
-
-    var category = categories[i];
-    var oneCategoryOption = {value: category, label:category};
-    categoryOptions.push(oneCategoryOption);
-
-}
-
-console.log (JSON.stringify(categoryOptions));
-console.log (categoryOptions);*/
-
+// updates news to firebase. record selected categories
 class NewsFeed extends React.Component {
-    
-    constructor(props) {
 
-        super(props)
+  constructor(props) {
 
-            // Set the state to hold the following Information
-            // feedData is set to null as it yet has to be called from the data controller
-            // feedNamesForSelectedCategory are the set of feeds available for the selected category
-            // moodSelected is set to all as default
+    super(props)
 
-            this.state = {feedData:[], categorySelected: null,feedSelected:null , moodSelected: "all"};
+    // Set the state to hold the following Information
+    // feedData is set to null as it yet has to be called from the data controller
+    // feedNamesForSelectedCategory are the set of feeds available for the selected category
+    // moodSelected is set to all as default
 
-            this.changeCategory = this.changeCategory.bind(this);
+    this.state = { feedData: [], categorySelected: null, feedSelected: null, moodSelected: "all" };
 
-            this.changeFeed = this.changeFeed.bind(this);
+    this.changeCategory = this.changeCategory.bind(this);
 
-            this.fetchData= this.fetchData.bind(this);
-            
-    }
+    this.changeFeed = this.changeFeed.bind(this);
 
-    componentDidMount() {
+    this.fetchData = this.fetchData.bind(this);
 
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) { 
-                //USER HAS LOGGED IN
+  }
 
-                firebase.database().ref("users/"+user.uid).once('value').then((snapshot) => {
-       
-                //console.log(user.uid);
-                //console.log (snapshot.val());
-                var userPreferrences = snapshot.val(); //an object
+  componentDidMount() {
 
-                this.setState ({categorySelected:userPreferrences.preferredCategory,feedSelected:userPreferrences.preferredFeed});
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        //USER HAS LOGGED IN
 
-                var feedSelected =  this.state.feedSelected;
-                console.log (feedSelected);
-                var sortBysAvailable = _NEWS_FEEDS_INFORMATION.sources[feedSelected].sortBysAvailable; 
-                console.log (sortBysAvailable);
-                this.fetchData (feedSelected,sortBysAvailable);
+        firebase.database().ref("users/" + user.uid).once('value').then((snapshot) => {
 
-                });
+          var userPreferrences = snapshot.val(); //an object
 
-            }
-            else {
-                //HAS LOGGED OUT
-            }
-        })
- 
+          this.setState({ categorySelected: userPreferrences.preferredCategory, feedSelected: userPreferrences.preferredFeed });
 
-    }
-    
-    //Should change the list of values in the drop down menu
-    changeCategory (categoryValue) {
+          var feedSelected = this.state.feedSelected;
+          this.fetchData(feedSelected);
+
+        });
+
+      }
+      else {
+        //HAS LOGGED OUT
+      }
+    })
 
 
-        this.setState({ categorySelected: categoryValue });       
+  }
+
+  //Should change the list of values in the drop down menu
+  changeCategory(categoryValue) {
 
 
-    }
+    this.setState({ categorySelected: categoryValue });
 
 
-    //Should change the article feed in the card groups
-    changeFeed (stationID, sortByOptions) {
-
-                     //Go through each article one by one in a loop
-                    //in the loop 
-                    
-                        //combine the date and title together and remove all special characters
-                        //check if that reference already exists in our articleUniqueIDs array
-                        //add that reference immidietely in our articleUniqueIDs array
-
-                        //if it is a new article push it to the array for the source selected else dont do anything 
-                        //(remember to add keys - happy,sad,angry,wow,neutral)
-
-                        //Set the feedData state to load articles
-        
-                        //then
-    }
-
-    //Function to fetch data for the selected news feed
-    fetchData(stationID, sortByOptions) {
-
-        var sortOption = null;
-        // if there is only one option, select it (top articles)
-        if (sortByOptions.length == 1) {
-            sortOption = sortByOptions [0];
-        }
-
-        // if more than one options are available, select the second option (latest articles) 
-        else {
-            sortOption = sortByOptions [1];
-        }
-
-        var thisComponent = this; //work around for scope!
-
-        NewsFeedController.searchData(stationID, sortOption)
-
-            .then(function (data) {
-                console.log (data);
-                thisComponent.addArticlesToFirebase(data);
-                //console.log (data.articles);
-            })
-            //.catch((err) => this.setState({ newFeedData: []},  ));
-            console.log(this.state.feed);
-
-    }
+  }
 
 
-    //Function to test if articles already exist in firebase and to add them if they dont 
-    //articles data is the data about the articles returned to us for a particular news feed
-    addArticlesToFirebase (articlesData) {
+  //Should change the article feed in the card groups
+  changeFeed(stationID, sortByOptions) {
 
- 
-        //Set the feedData state to load articles from firebase
+    //Go through each article one by one in a loop
+    //in the loop 
 
-        var articles = articlesData.articles;
+    //combine the date and title together and remove all special characters
+    //check if that reference already exists in our articleUniqueIDs array
+    //add that reference immidietely in our articleUniqueIDs array
 
-        Object.keys(articles).forEach(function (index){
-          var url = articles[index].url;
-          var urlId = JSON.stringify(url).replace(/\W/g, '');
-          var stationName = JSON.stringify(articlesData.source).replace(/\W/g, '')
-          var articlesRef = firebase.database().ref('articles/'+urlId);
-          articlesRef.set(articles[index]);
-          var articleSourceRef = firebase.database().ref(stationName+'/articles/' + urlId);
-          // articles[index].source = articlesData.source;
-          articleSourceRef.set(articles[index])
-        })
+    //if it is a new article push it to the array for the source selected else dont do anything 
+    //(remember to add keys - happy,sad,angry,wow,neutral)
+
+    //Set the feedData state to load articles
+
+  }
+
+  //Function to fetch data for the selected news feed
+  fetchData(stationID) {
+
+    var thisComponent = this; //work around for scope!
+
+    NewsFeedController.searchData(stationID)
+
+      .then(function (data) {
+        thisComponent.addArticlesToFirebase(data);
+      })
+
+  }
 
 
-    }
-                        
-    render () {
-        //console.log (this.state.feedNamesForSelectedCategory)
-        
-        return (<main>
-                    <HorizontalNavigation selectedCategory= {this.state.categorySelected} selectedFeed = {this.state.feedSelected} changeCategory={this.state.changeCategory} changeFeed = {this.state.changeCategory}  fetchData={this.fetchData}/>
-                </main>
-                );
-    }
+  //Function to test if articles already exist in firebase and to add them if they dont 
+  //articles data is the data about the articles returned to us for a particular news feed
+  addArticlesToFirebase(articlesData) {
+
+
+    //Set the feedData state to load articles from firebase
+
+    var articles = articlesData.articles;
+
+    Object.keys(articles).forEach(function (index) {
+      var url = articles[index].url;
+      var urlId = JSON.stringify(url).replace(/\W/g, '');
+      var articlesRef = firebase.database().ref('articles/' + urlId);
+      articles[index].station = articlesData.source;
+      articlesRef.set(articles[index]);
+    })
+
+
+  }
+
+  render() {
+
+    return (<main>
+      <HorizontalNavigation selectedCategory={this.state.categorySelected} selectedFeed={this.state.feedSelected} changeCategory={this.state.changeCategory} changeFeed={this.state.changeCategory} fetchData={this.fetchData} />
+    </main>
+    );
+  }
 }
 
+// provides two select dropdown menus and news cards
 class HorizontalNavigation extends React.Component {
-    
-    constructor(props) {
 
-        super(props)
+  constructor(props) {
 
-        this.state = {categorySelected:'', feedSelected:'', search:false, articles:[]};
+    super(props)
 
-        this.changeCategory = this.changeCategory.bind(this);
-        
-        this.changeFeed = this.changeFeed.bind(this);
+    this.state = { categorySelected: '', feedSelected: '', search: false, articles: [] };
 
-        this.submit = this.submit.bind(this);
-    }
+    this.changeCategory = this.changeCategory.bind(this);
 
-    changeFeed(selectedFeed) {
-        this.setState ({feedSelected:selectedFeed.label});
-       
+    this.changeFeed = this.changeFeed.bind(this);
 
-    }
+    this.submit = this.submit.bind(this);
+  }
 
-    changeCategory(selectedCategory) {
-        
+  changeFeed(selectedFeed) {
+    this.setState({ feedSelected: selectedFeed.value });
+  }
 
-        this.setState ({categorySelected:selectedCategory.value});
+  changeCategory(selectedCategory) {
 
-        var names = Object.keys(_NEWS_FEEDS_INFORMATION.categories[selectedCategory.value])
+    var options = [];
+    this.setState({ categorySelected: selectedCategory.value });
 
-        var options = [];
-        names.forEach(function (name){
-          options.push({value:name, label:_NEWS_FEEDS_INFORMATION.categories[selectedCategory.value][name]})
-        }) 
-        this.setState({feedsForCategory:options})
-    }
+    var names = Object.keys(_NEWS_FEEDS_INFORMATION.categories[selectedCategory.value])
 
-    submit(event){
-      event.preventDefault();
-      this.props.fetchData(this.state.feedSelected, ['top']);
-      var articlesRef = firebase.database().ref('articles').limitToLast(12);
-        articlesRef.on('value', (snapshot) =>{
-          var articlesArray = [];
-          snapshot.forEach(function (child){
-            var article = child.val();
-            article.key = child.key;
-            articlesArray.push(article)
-          });
-      this.setState({articles: articlesArray});
-      })
-      this.setState({search: true});
-    }
+    var options = [];
+    names.forEach(function (name) {
+      options.push({ value: _NEWS_FEEDS_INFORMATION.categories[selectedCategory.value][name], label: name })
+    })
+    this.setState({ feedsForCategory: options })
+  }
+
+  // click on filter, then it takes data from firebase and form cards
+  submit(event) {
+    event.preventDefault();
+    this.props.fetchData(this.state.feedSelected);
+    var articlesRef = firebase.database().ref('articles');
+    articlesRef.on('value', (snapshot) => {
+      var articlesArray = [];
+      snapshot.forEach(function (child) {
+        var article = child.val();
+        article.key = child.key;
+        articlesArray.push(article)
+      });
+      articlesArray = articlesArray.filter((article) => {
+        return article.station == this.state.feedSelected;
+      });
+      articlesArray = articlesArray.splice(0, 15);
+      this.setState({ articles: articlesArray });
+    })
+    this.setState({ search: true });
+  }
 
 
 
 
-    render () {
-        var articleCards = this.state.articles.map((article) =>{
-          return <Cell col={4}><CardItem article={article} key={article.key} />
-                </Cell>
-        })
+  render() {
+    var articleCards = this.state.articles.map((article) => {
+      return <Cell col={4}><CardItem article={article} key={article.key} />
+      </Cell>
+    })
 
-        return (
-            <div className="horizontal_nav_menu">
-                   <div className="selectCategory"> 
 
-                        <Select name="form-field-name" resetValue='' value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select"/>
-                        
-                        <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector"/>
-                    
-                        <Button raised onClick={this.submit}>Filter</Button>
-                   </div> 
-                   {this.state.search &&
-                     <Grid>
-                      {articleCards}
-                     </Grid>
-                   }
+    return (
+      <div className="horizontal_nav_menu">
+        <div className="selectCategory">
 
-            </div> 
-        );
-    }
-} 
+          <Select name="form-field-name" resetValue='' value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select" />
 
+          <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector" />
+
+          <Button raised onClick={this.submit}>Filter</Button>
+        </div>
+        {this.state.search &&
+          <Grid>
+            {articleCards}
+          </Grid>
+        }
+
+      </div>
+    );
+  }
+}
+
+// forms individual card items
 class CardItem extends React.Component {
-    likeMessage(emotion) {
+  likeMessage(emotion) {
     /* Access the message in the firebase and add this user's name */
-      var reactionRef = firebase.database().ref('articles/' + this.props.article.url + '/'+emotion);
+    var reactionRef = firebase.database().ref('articles/' + this.props.key + '/' + emotion);
 
-      //toggle logic
-      var userId = firebase.auth().currentUser.uid
-      var reactionObj = this.props.message;
-      var allEmotions = [
-        "happy", "sad", "wow", "neutral", "angry"
-      ]
-      var emotionIndex = allEmotions.indexOf(emotion)
-      allEmotions = allEmotions.splice(emotionIndex, 1)
-      if (reactionObj[emotion] && reactionObj[emotion][userId]) { //in likes list already
-        reactionObj[emotion][userId] = null; //remove
-      }
-      else { //add my like
-        reactionObj[emotion][userId] = true; //just make it true so we have a key
-      allEmotions.forEach(function (otherEmotion){
+    //toggle logic
+    var userId = firebase.auth().currentUser.uid
+    var reactionObj = this.props.message;
+    var allEmotions = [
+      "happy", "sad", "wow", "neutral", "angry"
+    ]
+    var emotionIndex = allEmotions.indexOf(emotion)
+    allEmotions = allEmotions.splice(emotionIndex, 1)
+    if (reactionObj[emotion] && reactionObj[emotion][userId]) {
+      reactionObj[emotion][userId] = null;
+    }
+    else {
+      reactionObj[emotion][userId] = true;
+      allEmotions.forEach(function (otherEmotion) {
         reactionObj[otherEmotion][userId] = null;
       })
+    }
+
+    reactionRef.set(reactionObj)
+  }
+
+
+
+  render() {
+    const style = {
+      color: '#fff',
+      height: '176px',
+      background: 'url(' + this.props.article.urlToImage + ') center / cover'
+    }
+
+    var allEmotions = { happy: 0, sad: 0, wow: 0, neutral: 0, angry: 0 }//TAKE THIS ARRAY TO RENDER COUNTS
+    Object.keys(allEmotions).forEach(function (emotion) {
+      var reactionRef = firebase.database().ref('messages/' + this.props.message.key + '/' + emotion);
+      if (reactionRef[emotion] != null) {
+        allEmotions.emotion = Object.keys(reactionRef[emotion]).length;
       }
+    })
 
-      reactionRef.set(reactionObj) //update the likes!
-    }
+    var max = 0;
+    var currentEmotion = 'neutral';
+    var colors = { happy: "yellow", sad: "blue", wow: "purple", neutral: "teal", angry: "red" }
+    Object.keys(allEmotions).forEach(function (emotion) {
+      if (allEmotions.emotion === max) {
+        currentEmotion = 'neutral';
+      } else if (allEmotions.emotion > max) {
+        max = allEmotions.emotion;
+        currentEmotion = emotion;
+      }
+    })
+
+    var articleEmotionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/emotion');
+    articleEmotionRef.set(currentEmotion);
 
 
-
-    render() {
-        const style = {
-          color: '#fff', 
-          height: '176px', 
-          background: 'url('+ this.props.article.urlToImage+') center / cover'}
-
-        
-
-        return (<Card shadow={0} >
-                        <CardTitle style={style}>{this.props.article.title}</CardTitle>
-                        <CardText>
-                           {this.props.article.description}
-                        </CardText>
-                        <CardActions border>
-                            <Button colored>Get Started</Button>
-                        </CardActions>
-                        <CardMenu style={{color: '#fff'}}>
-                            <EmailButton />
-                        </CardMenu>
-                   </Card>
-        )
-    }
+    // provides emoji buttons for five emotions: happy, sad, neutral, wow, angry
+    return (
+    <Card className="card" shadow={0} >
+      <CardTitle style={style}>{this.props.article.title}</CardTitle>
+      <CardText>
+        {this.props.article.description}
+      </CardText>
+      <CardActions border>
+        <Button colored> <span className="emj">
+          😮{}
+        </span></Button>
+        <Button colored><span className="emj">
+          😃
+                            </span></Button>
+        <Button colored> <span className="emj">
+          😐
+                            </span></Button>
+        <Button colored> <span className="emj">
+          😠
+                            </span></Button>
+        <Button colored> <span className="emj">
+          😦
+                            </span></Button>
+      </CardActions>
+      <CardMenu style={{ color: '#fff' }}>
+        <EmailButton />
+      </CardMenu>
+    </Card>
+    )
+  }
 }
 
 

@@ -3,17 +3,12 @@ const baseApiUrl = 'https://newsapi.org/v1/articles';
 
 //module with functions to download a model from online
 var controller = {
-    searchData: function(stationID, sortOption) {
+    searchData: function(stationID) {
         var source = "?source=";
         var sort = "&sortBy=";
         var api = "&apiKey=";
         
-        var uri = baseApiUrl+source+stationID+sort+sortOption+api+apiKey;
-
-        // var fetchPromise = fetch();
-        // var thenPromise = fetchPromise.then()
-        // return thenPromise;
-
+        var uri = baseApiUrl+source+stationID+api+apiKey;
 
         return fetch(uri)
             .then(function(res) { return res.json()})

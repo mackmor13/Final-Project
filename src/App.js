@@ -1,26 +1,14 @@
 import React from 'react';
 import { Link, hashHistory } from 'react-router';
-//load LazyLoad for this module for generating the cards for each news article
-//import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
-//import LazyLoad from 'react-lazy-load';
-//load CSS for this module
-// import './css/index.css';
-// import './css/card.css';
-// import './css/animate.css';
-// import './css/Flat-UI-master/dist/css/flat-ui.css';
 import { Button, Well, Collapse } from 'react-bootstrap';
-/*global feednami*/
 import $ from 'jquery';
 import firebase from 'firebase';
-//import cheerio from 'cheerio';
-//import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './join';
 import SignInForm from './login';
 import { Header, Drawer, Navigation, Layout } from 'react-mdl';
-//import Select from 'react-select';
-//import './css/selection.css';
 
-
+/* basic sturucture of this website
+    it shows navigation bar when the user is signed in*/
 class App extends React.Component {
 
     constructor(props) {
@@ -55,12 +43,12 @@ class App extends React.Component {
                 return Promise.all(profilePromise, userPromise);
             })
             .then(() => this.forceUpdate())
-            .catch((err) => console.log(err));
+            .catch((err) => alert(err));
     }
 
     signIn(email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch((err) => console.log(err));
+            .catch((err) => alert(err));
     }
 
     signOut() {
@@ -68,62 +56,60 @@ class App extends React.Component {
         hashHistory.push('/login');
     }
 
-    //how to display this component
-
     render() {
 
-        const style = {height: '53rem', position: 'relative'}
+        const style = { height: '53rem', position: 'relative' }
 
 
         return (
-                            <div style={style}>
-                                {
-                                <Layout style={{background: 'url(http://eskipaper.com/images/free-city-background-2.jpg) center / cover'}}>                                
-                                <Header transparent title={"React-news"}>
-                                </Header>
-                                <Drawer aria-label="List" title="React-news">
-                                <Navigation>
-                                    <Link aria-label="Main page" to="/newsfeed" activeClassName="activeLink">News</Link>
-                                    <Link aria-label="Main page" to="/emotion/happy" activeClassName="activeLink">Happy</Link>
-                                    <Link aria-label="Main page" to="/emotion/sad" activeClassName="activeLink">Sad</Link>
-                                    <Link aria-label="Main page" to="/emotion/wow" activeClassName="activeLink">Wow</Link>
-                                    <Link aria-label="Main page" to="/emotion/neutral" activeClassName="activeLink">Neutral</Link>
-                                    <Link aria-label="Main page" to="/emotion/angry" activeClassName="activeLink">Angry</Link>
-                                    <Link aria-label="Main page" to="/about" activeClassName="activeLink">About Us</Link>
-                                    <Link aria-label="Main page" to="/stats" activeClassName="activeLink">Statistics</Link>
+            <div style={style}>
+                {
+                    <Layout style={{ background: 'url(http://eskipaper.com/images/free-city-background-2.jpg) center / cover' }}>
+                        <Header transparent title={"React-news"}>
+                        </Header>
+                        <Drawer aria-label="List" title="React-news">
+                            <Navigation>
+                                <Link aria-label="Main page" to="/newsfeed" activeClassName="activeLink">News</Link>
+                                <Link aria-label="Main page" to="/emotion/happy" activeClassName="activeLink">Happy</Link>
+                                <Link aria-label="Main page" to="/emotion/sad" activeClassName="activeLink">Sad</Link>
+                                <Link aria-label="Main page" to="/emotion/wow" activeClassName="activeLink">Wow</Link>
+                                <Link aria-label="Main page" to="/emotion/neutral" activeClassName="activeLink">Neutral</Link>
+                                <Link aria-label="Main page" to="/emotion/angry" activeClassName="activeLink">Angry</Link>
+                                <Link aria-label="Main page" to="/about" activeClassName="activeLink">About Us</Link>
+                                <Link aria-label="Main page" to="/stats" activeClassName="activeLink">Statistics</Link>
 
-                                    <div className="logout">
+                                <div className="logout">
                                     <button aria-label="Logout" className="btn btn-warning" onClick={() => this.signOut()}>Sign out</button>
-                                    </div>
-                                </Navigation>
-                                </Drawer>
+                                </div>
+                            </Navigation>
+                        </Drawer>
+
+                        <main className="container">
+                            {this.props.children}
+                        </main>
+                    </Layout>
+                }
+                {!this.state.userId && //for sign in and sign up page
+                            <Layout fixedHeader>
+                                <Header title="React-news">
+                                </Header>
 
                                 <main className="container">
                                 {this.props.children}
                                 </main>
                             </Layout>
-                            }
-                            {/*!this.state.userId && //for sign in and sign up page
-                            <Layout fixedHeader>
-                                <Header title="KcalS">
-                                </Header>
-
-                                <main className="container">
-                                {this.props.children}
-                                </main>
-                            </Layout>*/
-                            }
+                }
 
 
-                </div>
-            
+            </div>
+
 
         );
     }
 }
 
 
-
+//gives statistics about emotion distributions in news aricle database
 export class Stats extends React.Component {
 
     componentDidMount() {
@@ -133,11 +119,11 @@ export class Stats extends React.Component {
         }
     }
     render() {
-        return<div><p>stats section</p></div>
+        return <div><p>stats section</p></div>
     }
 
 }
-
+// gives an detailed introduction of this website and all the functionalities it has
 export class About extends React.Component {
     componentDidMount() {
         //checks if firebase has a current user
