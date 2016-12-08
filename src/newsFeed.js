@@ -12,6 +12,7 @@ import NewsFeedController from './newsFeedDataController.js';
 
 //import require bootstrap components such as button, well, collapse
 import { Button, Well, Collapse } from 'react-bootstrap';
+import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton} from 'react-mdl';
 
 //Options Object for Select 
 var _NEWS_FEEDS_INFORMATION = {
@@ -1698,82 +1699,7 @@ class NewsFeed extends React.Component {
     //articles data is the data about the articles returned to us for a particular news feed
     addArticlesToFirebase (articlesData) {
 
-        //Array of articles
-        // //Name of news feed for which data is being called
-        // var source = articlesData.source;
-        // //
-        // var updates = {};
-
-        // for (var i=0 ; i <articles.length;i++ ) {
-
-
-        //     var oneArticle = articles [i];
-
-        //     //Initializing Emotions for each article
-        //     oneArticle.happy = 0 ;
-        //     oneArticle.neutral = 0 ;
-        //     oneArticle.wow = 0 ;
-        //     oneArticle.angry = 0;
-        //     oneArticle.sad = 0;
-
-        //     console.log (oneArticle);
-        //     console.log(i);
-
-        //     //combine the date and title together and remove all special characters
-        //     //check if that reference already exists in our articleUniqueIDs array
-            
-        //     //Extract the title for the article and remove special characters from it
-        //     var title = oneArticle.title;
-        //     title = title.replace(/\s/g, "_");
-        //     title =  JSON.stringify(title).replace(/\W/g, '')
-
-        //     //Extract the published data and remove special characters from it  
-        //     var publishedAt = oneArticle.publishedAt;
-           
-        //     publishedAt = publishedAt.replace(/\s/g, "_");
-
-
-        //     var url = oneArticle.url;
-        //     url = JSON.stringify(url).replace(/\W/g, '');
-        //     //Join the title and publishedAt variable to create an id for an article
-        //     var idForOneArticle = url;
-        //     console.log (idForOneArticle);
-
-        //     updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
-
-        //    // firebase.auth().onAuthStateChanged(user => {
-        //        // if (user) { 
-        // }
-
-
-        // firebase.database().ref("articleUniqueIDs/").once('value').then((snapshot) => {
-        //     console.log(updates);
-
-        //     //For each article key in updates do the following:
-        //     for(var articleKey in updates){
-        //         //console.log(article);
-
-        //         //check if that reference already exists in our articleUniqueIDs array
-        //         if (snapshot.hasChild(idForOneArticle)) {
-
-        //             console.log ("do not add");
-        //         }
-
-        //         //If it does not then do the following 
-        //         else {
-        //             var myObj = {};
-        //             myObj[articleKey] = updates[articleKey];
-        //             //Add this reference to firebase
-        //             //var articles = "articles";
-        //             //console.log (oneArticle.title);
-        //             //var updates = {};
-        //             //updates['articleUniqueIDs/' + idForOneArticle] = oneArticle;
-        //             firebase.database().ref().update(myObj);
-        //             console.log("add");
-        //         }   
-        //     }
-        // });
-
+ 
         //Set the feedData state to load articles from firebase
 
         var articles = articlesData.articles;
@@ -1793,7 +1719,6 @@ class NewsFeed extends React.Component {
     }
                         
     render () {
-        this.fetchData("ars-technica", ['top']) 
         //console.log (this.state.feedNamesForSelectedCategory)
         
         return (<main>
@@ -1809,7 +1734,7 @@ class HorizontalNavigation extends React.Component {
 
         super(props)
 
-        this.state = {categorySelected:''};
+        this.state = {categorySelected:'', feedSelected:'', search:false, articles:[]};
 
         this.changeCategory = this.changeCategory.bind(this);
         
@@ -1820,6 +1745,8 @@ class HorizontalNavigation extends React.Component {
 
     changeFeed(selectedFeed) {
         this.setState ({feedSelected:selectedFeed.label});
+       
+
     }
 
     changeCategory(selectedCategory) {
@@ -1838,14 +1765,28 @@ class HorizontalNavigation extends React.Component {
 
     submit(event){
       event.preventDefault();
-      this.props.fetchData(this.state.feedSelected, ['top'])
+      this.props.fetchData(this.state.feedSelected, ['top']);
+      var articlesRef = firebase.database().ref('articles').limitToLast(12);
+        articlesRef.on('value', (snapshot) =>{
+          var articlesArray = [];
+          snapshot.forEach(function (child){
+            var article = child.val();
+            article.key = child.key;
+            articlesArray.push(article)
+          });
+      this.setState({articles: articlesArray});
+      })
+      this.setState({search: true});
     }
 
 
 
 
     render () {
-
+        var articleCards = this.state.articles.map((article) =>{
+          return <Cell col={4}><CardItem article={article} key={article.key} />
+                </Cell>
+        })
 
         return (
             <div className="horizontal_nav_menu">
@@ -1856,44 +1797,47 @@ class HorizontalNavigation extends React.Component {
                         <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector"/>
                     
                         <Button onClick={this.submit}>Filter</Button>
-                     </div> 
+                   </div> 
+                   {this.state.search &&
+                     <Grid>
+                      {articleCards}
+                     </Grid>
+                   }
 
             </div> 
         );
     }
 } 
-class CardGroup extends React.Component {
-    
-    constructor(props) {
 
-        super(props)
+class CardItem extends React.Component {
+    likeMessage(emotion) {
+    /* Access the message in the firebase and add this user's name */
+      var reactionRef = firebase.database().ref('articleUniqueIDs/' + this.props.url + '/'+emotion);
 
-        this.state = {};
+      //toggle logic
+      var userId = firebase.auth().currentUser.uid
+      var reactionObj = this.props.message;
+      var allEmotions = [
+        "happy", "sad", "wow", "neutral", "angry"
+      ]
+      var emotionIndex = allEmotions.indexOf(emotion)
+      allEmotions = allEmotions.splice(emotionIndex, 1)
+      if (reactionObj[emotion] && reactionObj[emotion][userId]) { //in likes list already
+        reactionObj[emotion][userId] = null; //remove
+      }
+      else { //add my like
+        reactionObj[emotion][userId] = true; //just make it true so we have a key
+      allEmotions.forEach(function (otherEmotion){
+        reactionObj[otherEmotion][userId] = null;
+      })
+      }
 
+      reactionRef.set(reactionObj) //update the likes!
     }
 
 
-    render () {
-
-        
-
-
-        return (null);
-    }
-} 
-
-class Cards extends React.Component {
 
     render() {
-         var articlesRef = firebase.database().ref('articles');
-        var articlesArray = [];
-        articlesRef.on('value', (snapshot) =>{
-            snapshot.forEach(function (child){
-                var article = child.val();
-                article.key = child.key;
-                articlesArray.push(article);
-            })
-        })
         return <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
                         <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>Welcome</CardTitle>
                         <CardText>
