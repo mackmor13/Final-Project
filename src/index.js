@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import App, { Stats, About} from './App';
+import App, { Stats} from './App';
+import About from './about.js'
 import NewsFeed from './newsFeed'
 import Join from './join'
 import Login from './login'
@@ -10,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import 'react-select/dist/react-select.css';
-
 import { Button, Well, Collapse } from 'react-bootstrap';
 
 // Initialize Firebase

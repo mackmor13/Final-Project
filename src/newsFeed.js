@@ -6,6 +6,7 @@ import NewsFeedController from './newsFeedDataController.js';
 import { Well, Collapse } from 'react-bootstrap';
 import { Card, CardActions, CardMenu, CardText, CardTitle, Grid, Cell, IconButton, Button } from 'react-mdl';
 import EmailButton from "./EmailButton.js";
+import "./style.css"
 
 //Options Object for Select 
 var _NEWS_FEEDS_INFORMATION = {
@@ -1574,7 +1575,7 @@ class NewsFeed extends React.Component {
     // feedNamesForSelectedCategory are the set of feeds available for the selected category
     // moodSelected is set to all as default
 
-    this.state = { feedData: [], categorySelected: null, feedSelected: null, moodSelected: "all" };
+    this.state = { feedData: [], categorySelected: null, feedSelected: null, moodSelected: "all"};
 
     this.changeCategory = this.changeCategory.bind(this);
 
@@ -1665,11 +1666,19 @@ class NewsFeed extends React.Component {
       var urlId = JSON.stringify(url).replace(/\W/g, '');
       var articlesRef = firebase.database().ref('articles/' + urlId);
       articles[index].station = articlesData.source;
+      // articles[index].happy = true;
+      // articles[index].sad = true;
+      // articles[index].neutral = true;
+      // articles[index].angry = true;
       articlesRef.set(articles[index]);
     })
 
 
   }
+
+  // handleClick(event) {
+  //   this.props.NewsFeed(this.state.)
+  // }
 
   render() {
 
@@ -1749,11 +1758,11 @@ class HorizontalNavigation extends React.Component {
       <div className="horizontal_nav_menu">
         <div className="selectCategory">
 
-          <Select name="form-field-name" resetValue='' value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select" />
+          <Select name="form-field-name" resetValue='' placeholder="Choose a city or a category..." value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} className="select" />
 
-          <Select name="form-field-names" resetValue='' value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector" />
+          <Select name="form-field-names" resetValue='' placeholder="Then select a news feed here..." value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} className="selector" />
 
-          <Button raised onClick={this.submit}>Filter</Button>
+          <Button className="mdl-button" raised onClick={this.submit}>Filter</Button>
         </div>
         {this.state.search &&
           <Grid>
@@ -1768,32 +1777,81 @@ class HorizontalNavigation extends React.Component {
 
 // forms individual card items
 class CardItem extends React.Component {
-  // likeMessage(emotion) {
-  //   /* Access the message in the firebase and add this user's name */
-  //   var reactionRef = firebase.database().ref('articles/' + this.props.key + '/' + emotion);
+  constructor(props){
+    super(props);
 
-  //   //toggle logic
-  //   var userId = firebase.auth().currentUser.uid
-  //   var reactionObj = this.props.message;
-  //   var allEmotions = [
-  //     "happy", "sad", "wow", "neutral", "angry"
-  //   ]
-  //   var emotionIndex = allEmotions.indexOf(emotion)
-  //   allEmotions = allEmotions.splice(emotionIndex, 1)
-  //   if (reactionObj[emotion] && reactionObj[emotion][userId]) {
-  //     reactionObj[emotion][userId] = null;
-  //   }
-  //   else {
-  //     reactionObj[emotion][userId] = true;
-  //     allEmotions.forEach(function (otherEmotion) {
-  //       reactionObj[otherEmotion][userId] = null;
-  //     })
-  //   }
+    var userId = firebase.auth().currentUser.uid;
+    this.state={userId:userId, emotions:{}, allEmotions:{happy:false, sad:false, neutral:false, angry:false}}
 
-  //   reactionRef.set(reactionObj)
+      this.showEmotion = this.showEmotion.bind(this);
+      this.generate = this.generate.bind(this);
+  }
+
+  // handleClick(event, emotion){
+  //   event.preventDefault();
+  //   this.showEmotion(emotion);
   // }
+  
+  showEmotion(emotion) {
+    event.preventDefault();
+    /* Access the message in the firebase and add this user's name */
+    // var allEmotions = [
+    //   "happy", "sad", "neutral", "angry"
+    // ]
+    var thisComponent = this;
+    // allEmotions = allEmotions.splice(allEmotions.indexOf(emotion), 1);
+    var thisEmotionRef = firebase.database().ref('articles/' + thisComponent.props.article.key + '/' + emotion+'/'+this.state.userId);
+    var thisEmotionObj = thisComponent.props.article[emotion] || {};
+    if ( thisEmotionObj[emotion] && thisEmotionObj[emotion][thisComponent.state.userId]) {
+      thisEmotionRef.set(null);
+      var redact = thisComponent.state.allEmotions;
+      Object.keys(redact).forEach(function (oneEmotion){
+        redact[oneEmotion]=true;
+      })
+      redact[emotion]=false;
+      thisComponent.setState({allEmotions:redact})
+  }
+    else {
+      thisEmotionRef.set(true);
+      var redact = thisComponent.state.allEmotions;
+      Object.keys(redact).forEach(function (oneEmotion){
+        redact[oneEmotion]=false;
+      })
+      thisComponent.setState({allEmotions:redact})
+    }    
+        console.log(this.state.allEmotions);
 
+    // allEmotions = allEmotions.splice(allEmotions.indexOf(emotion), 1);
+    // allEmotions.forEach(function (oneEmotion){
 
+    //   var reactionRef = firebase.database().ref('articles/' + thisComponent.props.article.key + '/' + oneEmotion+'/'+thisComponent.state.userId);
+
+    //   var reactionObj = thisComponent.props.article[oneEmotion] || {};
+    //   if(reactionObj[oneEmotion] ){
+    //     reactionRef.set(null);
+    //   }
+    // })
+    // this.generate();
+  }
+
+  generate(){
+    var allEmotions = { happy:{count:0, clicked:''} , sad:{count:0, clicked:''}, neutral:{count:0, clicked:''}, angry:{count:0, clicked:''} }
+    var thisComponent = this;
+    //TAKE THIS ARRAY TO RENDER COUNTSsssc
+    
+    Object.keys(allEmotions).forEach(function (oneEmotion) {
+      // var reactionRef = firebase.database().ref('articles/' + this.props.key + '/' + oneEmotion);
+      if (thisComponent.props.article[oneEmotion]) {
+        allEmotions[oneEmotion].count = Object.keys(thisComponent.props.article[oneEmotion]).length;
+        if(thisComponent.props.article[oneEmotion][thisComponent.state.userId]){
+          allEmotions[oneEmotion].clicked = 'show';
+        }
+      }
+    }) 
+    console.log(allEmotions);
+    this.setState({emotions:allEmotions}); 
+    {/*className={this.state.emotions.happy.clicked} colored onclick = {this.showEmotion('happy')}*/}
+  }
 
   render() {
     const style = {
@@ -1802,13 +1860,8 @@ class CardItem extends React.Component {
       background: 'url(' + this.props.article.urlToImage + ') center / cover'
     }
 
-    // var allEmotions = { happy: 0, sad: 0, wow: 0, neutral: 0, angry: 0 }//TAKE THIS ARRAY TO RENDER COUNTS
-    // Object.keys(allEmotions).forEach(function (emotion) {
-    //   var reactionRef = firebase.database().ref('messages/' + this.props.message.key + '/' + emotion);
-    //   if (reactionRef[emotion] != null) {
-    //     allEmotions.emotion = Object.keys(reactionRef[emotion]).length;
-    //   }
-    // })
+
+
 
     // var max = 0;
     // var currentEmotion = 'neutral';
@@ -1826,29 +1879,37 @@ class CardItem extends React.Component {
     // articleEmotionRef.set(currentEmotion);
 
 
-    // provides emoji buttons for five emotions: happy, sad, neutral, wow, angry
+    // provides emoji buttons for five emotions: happy, sad, neutral, angry
     return (
-    <Card className="card" shadow={0} >
-      <CardTitle style={style}>{this.props.article.title}</CardTitle>
+    <Card z-index='-1' className="card" shadow={0} >
+      <CardTitle style={style}></CardTitle>
       <CardText>
-        {this.props.article.description}
+        <strong><a href={this.props.article.url}>{this.props.article.title}</a></strong>
+        <p>{this.props.article.publishedAt}</p>
+        <p>{this.props.article.description}</p>
+        
       </CardText>
       <CardActions border>
-        <Button colored> <span className="emj">
+        {/*<Button colored> <span className="emj">
           😮{}
-        </span></Button>
-        <Button colored><span className="emj">
-          😃
+        </span></Button>*/}
+        {!this.state.allEmotions.happy &&
+        <Button colored onClick={() =>this.showEmotion('happy')} disabled={this.state.allEmotions.happy}><span className="emj">
+          😃 {/* this.state.emotions.happy.count*/}
                             </span></Button>
-        <Button colored> <span className="emj">
-          😐
+        }{!this.state.allEmotions.neutral &&
+        <Button colored onClick={() =>this.showEmotion('neutral')} disabled={this.state.allEmotions.neutral}> <span className="emj">
+          😐 {/* this.state.emotions.neutral.count*/}
                             </span></Button>
-        <Button colored> <span className="emj">
-          😠
+        }{!this.state.allEmotions.angry &&
+        <Button colored onClick={() =>this.showEmotion('angry')} disabled={this.state.allEmotions.angry}> <span className="emj">
+          😠 {/* this.state.emotions.angry.count*/}
                             </span></Button>
-        <Button colored> <span className="emj">
-          😦
+        }{!this.state.allEmotions.sad &&
+        <Button colored onClick={() =>this.showEmotion('sad')} disabled={this.state.allEmotions.sad}> <span className="emj">
+          😦 {/* this.state.emotions.sad.count*/}
                             </span></Button>
+        }
       </CardActions>
       <CardMenu style={{ color: '#fff' }}>
         <EmailButton />

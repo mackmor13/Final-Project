@@ -2,7 +2,7 @@
     explains all the functionalities in the app
     and explains how it helps minority people
 */
-import react from 'react';
+import React from 'react';
 import "./style.css";
 
 class AboutUs extends React.Component {

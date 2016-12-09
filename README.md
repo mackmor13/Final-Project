@@ -1,6 +1,6 @@
 # Final Project React News
 
-In React News, please sign up with your email and pick your preferred categories. Then, in the main page, you get to choose the news you want to read by category and feed. After picking the category and feed, a group of cards with titles and summaries will be shown. If you are interested in the news, you can read the original article by clicking on the title. You can express your feelings by clicking on the emoji underneath summaries and share the news on Facebook. You can also email representatives to express how you feel. You can sort news by emotion too. You can see how many articles under each emotion in statistics page.
+In React News, please sign up with your email . Then, in the main page, you get to choose the news you want to read by category and feed. After picking the category and feed, a group of cards with titles and summaries will be shown. If you are interested in the news, you can read the original article by clicking on the titles. You can express your feelings by clicking on the emoji underneath summaries. You can also email representatives to express how you feel by clicking on the email icon. You can sort news by emotion too. You can see how many articles under each emotion in statistics page.
 
 The below questions should be answered regarding your submission!
 

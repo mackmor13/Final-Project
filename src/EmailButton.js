@@ -67,7 +67,7 @@ class CongressDialog extends React.Component {
     // the button and the dialog box
     return (
       <div>
-        <Button onClick={this.handleOpenDialog}>Contact <br />Representative</Button>
+        <Button onClick={this.handleOpenDialog} data-toggle="tooltip" data-placement="bottom" title="Email a Representative"><i className="fa fa-envelope" aria-hidden="true"></i></Button>
         <Dialog id="Dialog" open={this.state.openDialog}>
           <Button id="close" onClick={this.handleCloseDialog}>&times;</Button>
           <DialogTitle><h4>Email your Representative</h4></DialogTitle>

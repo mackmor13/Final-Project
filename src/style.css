@@ -24,3 +24,12 @@ Dialog {
     float: right;
     background-color: lightgrey;
 }
+
+
+.horizontal_nav_menu {
+    z-index: 100000 !important;
+}
+
+.card {
+    z-index: -100000 !important;
+}
