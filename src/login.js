@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, hashHistory } from 'react-router';
 import firebase from 'firebase';
+import './style.css';
 import { Spinner } from 'react-mdl';
 // import "./style.css";
 

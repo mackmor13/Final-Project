@@ -12,8 +12,8 @@
   "scripts": {
     "test": "react-scripts test --env=jsdom",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "npm run build&&gh-pages -d build"
+    "build": "react-scripts build"
+
   },
   "repository": {
     "type": "git",

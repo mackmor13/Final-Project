@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import 'react-select/dist/react-select.css';
+import './style.css';
 import { Button, Well, Collapse } from 'react-bootstrap';
 
 // Initialize Firebase

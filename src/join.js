@@ -1,6 +1,7 @@
 // makes users sign up so that they can see the news
 import React from 'react';
 import firebase from 'firebase';
+import './style.css';
 import { Link, hashHistory } from 'react-router';
 import { Button, Spinner } from 'react-mdl';
 

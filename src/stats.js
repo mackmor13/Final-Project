@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import firebase from 'firebase';
-import emoji from "../public/img/emoji.jpg";
 
 class Stats extends React.Component {
 
@@ -33,7 +32,6 @@ class Stats extends React.Component {
         })
 
         return (
-            <div>
                 <table className="table table-condensed table-striped">
                     <thead>
                         <tr>
@@ -46,8 +44,7 @@ class Stats extends React.Component {
                         {statRows}
                     </tbody>
                 </table>
-                <img src={emoji} alt="emotion" />
-            </div>
+
         )
     }
 }
