@@ -1607,6 +1607,7 @@ class NewsFeed extends React.Component {
             }
             else {
                 //HAS LOGGED OUT
+                hashHistory.push("/login")
             }
         })
 
