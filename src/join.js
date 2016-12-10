@@ -3,7 +3,6 @@ import React from 'react';
 import firebase from 'firebase';
 import { Link, hashHistory } from 'react-router';
 import { Button, Spinner } from 'react-mdl';
-import "./style.css";
 
 /* A form for signing up and logging into this website.
   Specifies email, password.
@@ -16,13 +15,12 @@ class SignUpForm extends React.Component {
       'email': undefined,
       'password': undefined,
       'sedPassword': undefined,
-      'preferredCategory': undefined,
-      'preferredFeed': undefined,
       showSpinner: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   //update state for specific field
@@ -35,30 +33,19 @@ class SignUpForm extends React.Component {
     this.setState(changes); //update state
   }
 
+  cancel(e) {
+    e.preventDefault();
+    hashHistory.push('/login');
+  }
+
 
   //A callback function for registering new users
-  signUp(event, email, password, preferredCategory, preferredFeed) {
+  signUp(event, email, password) {
 
     event.preventDefault(); //don't submit
     /* Create a new user and save their information */
     this.setState({ showSpinner: true })
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(function (firebaseUser) {
-        firebaseUser.sendEmailVerification();//let firebase send email verification
-        alert("Check verification email");
-        // var profilePromise = firebaseUser.updateProfile({
-        //   preferredCategory: preferredCategory,
-        //   preferredFeed: preferredFeed
-        // }); //return promise for chaining
-
-        // //create new entry in the Cloud DB (for others to reference)
-        var userRef = firebase.database().ref('users/' + firebaseUser.uid);
-        var userData = {
-          preferredCategory: preferredCategory,
-          preferredFeed: preferredFeed
-        }
-        userRef.set(userData); //update entry in JOITC, return promise for chaining
-      })
       .catch((err) => alert(err));
     hashHistory.push('/newsfeed');
   }
@@ -113,10 +100,8 @@ class SignUpForm extends React.Component {
     var emailErrors = this.validate(this.state.email, { required: true, email: true });
     var passwordErrors = this.validate(this.state.password, { required: true, minLength: 6 });
     var passwordMatchErrors = this.validate(this.state.sedPassword, { required: true, match: true });
-    var preferredCategoryErrors = this.validate(this.state.preferredCategory, {required: true});
-    var preferredFeedErrors = this.validate(this.state.preferredFeed, {required: true});
     //button validation
-    var signUpEnabled = (emailErrors.isValid && passwordErrors.isValid && preferredCategoryErrors.isValid && passwordMatchErrors.isValid && preferredFeedErrors.isValid);
+    var signUpEnabled = (emailErrors.isValid && passwordErrors.isValid && passwordMatchErrors.isValid);
 
     return (
       <div>
@@ -128,11 +113,10 @@ class SignUpForm extends React.Component {
           <ValidatedInput field="email" type="email" label="The Email Address That You Can't Forget" changeCallback={this.handleChange} errors={emailErrors} />
           <ValidatedInput field="password" type="password" label="You Top-Secret Unforgettable Password" changeCallback={this.handleChange} errors={passwordErrors} />
           <ValidatedInput field="sedPassword" type="password" label="Tell Me That Password One More Time" changeCallback={this.handleChange} errors={passwordMatchErrors} />
-          <ValidatedInput field="preferredCategory" type="text" label="Select A Category" changeCallback={this.handleChange} errors={preferredCategoryErrors} />
-          <ValidatedInput field="preferredFeed" type="text" label="Select A Feed" changeCallback={this.handleChange} errors={preferredFeedErrors} />
 
           <div className="form-group sign-up-buttons">
-            <Button aria-label="sign up" raised colored className="btn btn-primary" disabled={!signUpEnabled} onClick={(e) => this.signUp(e, this.state.email, this.state.password, this.state.preferredCategory, this.state.preferredFeed)}>Sign-up</Button>
+            <Button aria-label="Sign up" aria-role="button" raised colored className="btn btn-success" disabled={!signUpEnabled} onClick={(e) => this.signUp(e, this.state.email, this.state.password)}>Sign-up</Button>
+            <Button aria-label="Cancel" aria-role="button" raised colored className="btn btn-primary" onClick={(e) => this.cancel(e)}>Cancel</Button>
             {this.state.showSpinner &&
               <Spinner />
             }

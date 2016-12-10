@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import App, { Stats} from './App';
-import About from './about.js'
-import NewsFeed from './newsFeed'
-import Join from './join'
-import Login from './login'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import App from './App';
+import About from './about.js';
+import Stats from './stats';
+import NewsFeed from './newsFeed';
+import Join from './join';
+import Login from './login';
 import firebase from 'firebase';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-mdl/extra/material.css';
@@ -35,7 +36,7 @@ ReactDOM.render(
       <Route path="about" component={About} />
 
     </Route>
-  </Router>,  document.getElementById('root')
+  </Router>, document.getElementById('root')
 );
 
 firebase.auth();

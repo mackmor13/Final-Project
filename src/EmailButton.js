@@ -69,8 +69,8 @@ class CongressDialog extends React.Component {
       <div>
         <Button onClick={this.handleOpenDialog} data-toggle="tooltip" data-placement="bottom" title="Email a Representative"><i className="fa fa-envelope" aria-hidden="true"></i></Button>
         <Dialog id="Dialog" open={this.state.openDialog}>
-          <Button id="close" onClick={this.handleCloseDialog}>&times;</Button>
-          <DialogTitle><h4>Email your Representative</h4></DialogTitle>
+          <Button aria-role="button" aria-lable="Close" id="close" onClick={this.handleCloseDialog}>&times;</Button>
+          <DialogTitle className="emailTitle"><h4>Email your Representative</h4></DialogTitle>
           <DialogContent id="DialogContent">
             <SearchTypes searchFunction={this.fetchData} />
             <p>{Representative}</p>
@@ -116,7 +116,7 @@ class SearchTypes extends React.Component {
         <InputGroup>
           <FormControl type="text" value={this.state.value} placeholder="Enter your Zip code..." onChange={this.handleChange} />
           <InputGroup.Button>
-            <Button onClick={this.handleClick} type="button"><Glyphicon glyph="search" aria-label="Search" /></Button>
+            <Button aria-role="button" onClick={this.handleClick} type="button"><Glyphicon glyph="search" aria-label="Search" /></Button>
           </InputGroup.Button>
         </InputGroup>
       </Form>

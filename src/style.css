@@ -19,17 +19,73 @@ Dialog {
     overflow-y: scroll;
 }
 
+.emailTitle{
+    text-align: left;
+}
+
 /*styles the x button to close*/
 #close {
     float: right;
     background-color: lightgrey;
+    margin: 4%;
 }
 
-
-.horizontal_nav_menu {
-    z-index: 100000 !important;
+.drawer {
+    color: black;
 }
 
-.card {
-    z-index: -100000 !important;
+#heading2 {
+    font-family: Blippo, fantasy; 
+}
+
+#p1 {
+    font-size: 2em;
+}
+
+#p2 {
+    font-size: 1.2em;
+}
+
+#yellow {
+    color: yellow;
+}
+
+#red {
+    color: red;
+}
+
+#blue {
+    color: cornflowerblue;
+}
+
+#teal {
+    color: teal;
+}
+
+ .whiteLink:link {
+    color: white;
+}
+
+.whiteLink:visited {
+    color: white;
+}
+
+.whiteLink:active {
+    color: white;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:active {
+    color: black;
+}
+
+.selectForm {
+    padding:1%;
 }

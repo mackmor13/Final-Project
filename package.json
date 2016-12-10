@@ -1,6 +1,6 @@
 {
   "name": "finalProject",
-  "author": "Jared Praino, Yuyue Zhu, Morgan Mackaay, Zoshua Colah",
+  "author": "Yuyue Zhu, Morgan Mackaay, Jared Praino, Zoshua Colah",
   "homepage": "https://mackmor13.github.io/finalProject/build",
   "version": "1.0.0",
   "description": "",
@@ -28,6 +28,8 @@
     "firebase": "^3.6.2",
     "jquery": "^3.1.1",
     "js-md5": "^0.4.1",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-transition-group": "^15.4.1",

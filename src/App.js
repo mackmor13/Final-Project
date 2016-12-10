@@ -13,16 +13,16 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { userId: null };
+        this.state = { user: null };
     }
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({ userId: user.uid });
+                this.setState({ user: user });
             }
             else {
-                this.setState({ userId: null });
+                this.setState({ user: null });
             }
         })
     }
@@ -59,27 +59,23 @@ class App extends React.Component {
     render() {
 
         const style = { height: '53rem', position: 'relative' }
+        const color = { color: 'black'};
 
 
         return (
             <div style={style}>
-                {
-                    <Layout style={{ background: 'url(http://eskipaper.com/images/free-city-background-2.jpg) center / cover' }}>
-                        <Header transparent title={"React-news"}>
+                {this.state.user &&
+                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                        <Header transparent title={"React-news"} >
                         </Header>
-                        <Drawer aria-label="List" title="React-news">
+                        <Drawer className="drawer" aria-label="List" title="React-news" >
                             <Navigation>
-                                <Link aria-label="Main page" to="/newsfeed" activeClassName="activeLink">News</Link>
-                                <Link aria-label="Main page" to="/emotion/happy" activeClassName="activeLink">Happy</Link>
-                                <Link aria-label="Main page" to="/emotion/sad" activeClassName="activeLink">Sad</Link>
-                                <Link aria-label="Main page" to="/emotion/wow" activeClassName="activeLink">Wow</Link>
-                                <Link aria-label="Main page" to="/emotion/neutral" activeClassName="activeLink">Neutral</Link>
-                                <Link aria-label="Main page" to="/emotion/angry" activeClassName="activeLink">Angry</Link>
-                                <Link aria-label="Main page" to="/about" activeClassName="activeLink">About Us</Link>
-                                <Link aria-label="Main page" to="/stats" activeClassName="activeLink">Statistics</Link>
+                                <Link aria-label="Main page" aria-role="button" to="/newsfeed" activeClassName="activeLink">News</Link>
+                                <Link aria-label="About Page" aria-role="button" to="/about" activeClassName="activeLink">About Us</Link>
+                                <Link aria-label="Statistics Page" aria-role="button" to="/stats" activeClassName="activeLink">Statistics</Link>
 
                                 <div className="logout">
-                                    <button aria-label="Logout" className="btn btn-warning" onClick={() => this.signOut()}>Sign out</button>
+                                    <button aria-label="Logout" aria-role="button" className="btn btn-warning" onClick={() => this.signOut()}>Sign out</button>
                                 </div>
                             </Navigation>
                         </Drawer>
@@ -89,15 +85,15 @@ class App extends React.Component {
                         </main>
                     </Layout>
                 }
-                {!this.state.userId && //for sign in and sign up page
-                            <Layout fixedHeader>
-                                <Header title="React-news">
-                                </Header>
+                {!this.state.user && //for sign in and sign up page
+                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                        <Header transparent title="React-news" >
+                        </Header>
 
-                                <main className="container">
-                                {this.props.children}
-                                </main>
-                            </Layout>
+                        <main className="container">
+                            {this.props.children}
+                        </main>
+                    </Layout>
                 }
 
 

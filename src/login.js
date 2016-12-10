@@ -1,10 +1,9 @@
 // gives the sign in form for users
 import React from 'react';
-import noUserPic from '../public/img/no-user-pic.png';
 import { Link, hashHistory } from 'react-router';
 import firebase from 'firebase';
 import { Spinner } from 'react-mdl';
-import "./style.css"
+// import "./style.css";
 
 /*A form for logging into a website. Specifies email, password.*/
 class SignInForm extends React.Component {
@@ -111,12 +110,12 @@ class SignInForm extends React.Component {
 
 
                     <div className="form-group sign-up-buttons">
-                        <button aria-label="sign in" className="btn btn-primary" disabled={!signInEnabled} onClick={(e) => this.signIn(e)}>Sign-in</button>
+                        <button aria-label="Sign In" aria-role="button" className="btn btn-primary" disabled={!signInEnabled} onClick={(e) => this.signIn(e)}>Sign-in</button>
                         {this.state.showSpinner &&
                             <Spinner />
                         }
                     </div>
-                    <Link to="join" activeClassName="activeLink">New Users Feel Free To Sign-Up Here </Link>
+                    <Link aria-role="link" aria-label="To Sign-up" to="join" activeClassName="activeLink">New Users Feel Free To Sign-Up Here </Link>
                 </form>
             </div>
         );
