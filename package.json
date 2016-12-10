@@ -1,7 +1,7 @@
 {
   "name": "finalProject",
   "author": "Yuyue Zhu, Morgan Mackaay, Jared Praino, Zoshua Colah",
-  "homepage": "https://mackmor13.github.io/finalProject/build",
+  "homepage": "https://mackmor13.github.io/finalProject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "test": "react-scripts test --env=jsdom",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build&&gh-pages -d build"
+     "deploy": "npm run build&&gh-pages -d build"
   },
   "repository": {
     "type": "git",
