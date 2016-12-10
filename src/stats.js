@@ -19,7 +19,7 @@ class Stats extends React.Component {
         mostRef.on('value', (snapshot) => {
             snapshot.forEach(function (child) {
                 var article = child.val();
-                if (article.emotion != '') {
+                if (article.emotion && article.emotion != '') {
                     stats[article.emotion].count = stats[article.emotion].count + 1;
                     stats[article.emotion].sampleArticle = <strong><a href={article.url} target="_blank" className='linkArticle'>{article.title}</a></strong>
                 }
