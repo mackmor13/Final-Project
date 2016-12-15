@@ -24,7 +24,7 @@ Dialog {
 }
 
 /*styles the x button to close*/
-#close {
+.close {
     float: right;
     background-color: lightgrey;
     margin: 4%;
@@ -34,31 +34,31 @@ Dialog {
     color: black;
 }
 
-#heading2 {
+.aboutTitle {
     font-family: Blippo, fantasy; 
 }
 
-#p1 {
+.aboutInfoCard {
     font-size: 2em;
 }
 
-#p2 {
+.aboutInfoParagraph {
     font-size: 1.2em;
 }
 
-#yellow {
+.yellow {
     color: yellow;
 }
 
-#red {
+.red {
     color: red;
 }
 
-#blue {
+.blue {
     color: cornflowerblue;
 }
 
-#teal {
+.teal {
     color: teal;
 }
 

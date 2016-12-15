@@ -40,6 +40,9 @@ class Stats extends React.Component {
 
         return (
             <div>
+                <p>This table shows both the most popular articles as well as the amount of reactions for each emotion. 
+                You can use this table to find our top trending articles as well as get a sense of the general
+                public's sentiment towards the news. </p>
                 <table className="table table-condensed table-striped">
                     <thead>
                         <tr>

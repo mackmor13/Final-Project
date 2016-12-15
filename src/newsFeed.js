@@ -9,6 +9,7 @@ import EmailButton from "./EmailButton.js";
 import "./card.css";
 import _ from 'lodash';
 import moment from 'moment';
+import 'bootstrap/dist/css/bootstrap.css';
 
 //Options Object for Select 
 var _NEWS_FEEDS_INFORMATION = {
@@ -1954,7 +1955,7 @@ class CardItem extends React.Component {
                                 <a className="share-icon twitter" href="#"><span className="fa fa-twitter" /></a>
                                 <a className="share-icon googleplus" href="#"><span className="fa fa-google-plus" /></a>
                             </div>
-                            <EmailButton aria-lable="Email Representatives" aria-role="button" />
+                            <EmailButton aria-lable="Email Representatives" aria-role="button" article={this.props.article} />
                         </div>
                         <div className="card_title">
                             <strong><a aria-lable="Article Source Website" href={this.props.article.url} target="_blank" className='linkArticle whiteLink'>{this.props.article.title}</a></strong>

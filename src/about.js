@@ -19,7 +19,7 @@ class AboutUs extends React.Component {
     render() {
         return (
             <div>
-                <h2 id="heading2">About React News</h2>
+                <h2 className="aboutTitle">About React News</h2>
                 <p id="p1">
                     Through this product,
                     </p>
@@ -34,15 +34,15 @@ class AboutUs extends React.Component {
                         You can share the interesting news to Facebook.
                     </ol>
 
-                <p id="p1">Color of the card:</p>
+                <p className="aboutInfoCard">Color of the card:</p>
                 <ol>
-                    Yellow = <span id="yellow">Happy</span>
-                    Red    = <span id="red">Angry</span>
-                    Blue   = <span id="blue">Sad</span>
-                    Teal   = <span id="teal">Neutral</span>
+                    Yellow = <span className="yellow">Happy</span>
+                    Red    = <span className="red">Angry</span>
+                    Blue   = <span className="blue">Sad</span>
+                    Teal   = <span className="teal">Neutral</span>
                 </ol>
 
-                <p id="p2">
+                <p className="aboutInfoParagraph">
                     This product benefits everyone who is interested in finding out what is going on in the world by getting the fastest news.
                     However, this is the most beneficial to <strong> minority people </strong> because:
                     </p>

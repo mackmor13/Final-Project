@@ -5,15 +5,15 @@ import Mailto from 'react-mailto';
 import { Button, Well, Image, Collapse, Form, FormControl, InputGroup, Glyphicon } from 'react-bootstrap';
 import $ from 'jquery';
 import firebase from 'firebase';
-import './button.css';
+import './newsFeed.js'
 
 //Class which generates the entire application being created
 class App extends React.Component {
   render() {
     return (
       // This div contains the dialog and button for contacting a representative
-      <div id="wrapper">
-        <CongressDialog />
+      <div>
+        <CongressDialog article={this.props.article}/>
       </div>
     );
   }
@@ -23,7 +23,7 @@ class App extends React.Component {
 class CongressDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { contactForm: [] };
+    this.state = { contactForm: [], articles:[this.props.article]};
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -58,10 +58,13 @@ class CongressDialog extends React.Component {
 
   // Displays the representatives image, name with link to email, phone number and party
   render() {
+    var thisComponent = this;
     var Representative = this.state.contactForm.map(function (element) {
       return <div>
         <Image className="RepImage" src={controller.getPictureUrl(element)} alt="picture for {element.last_name}" />
-        <div><Mailto email={element.oc_email} obfuscate={true}>{element.first_name} {element.last_name}</Mailto></div>
+        <div><Mailto email={element.oc_email} headers={{subject: thisComponent.props.article.title, body: 'Hello '  + element.last_name + 
+        ', I am writing to you about about the ' + thisComponent.props.article.title + ' article. I believe '}} 
+        obfuscate={true}>{element.first_name} {element.last_name}</Mailto></div>
         <div>Phone: {element.phone}</div><div>Party: {element.party}</div></div>;
     })
     // the button and the dialog box
@@ -69,7 +72,7 @@ class CongressDialog extends React.Component {
       <div>
         <Button onClick={this.handleOpenDialog} data-toggle="tooltip" data-placement="bottom" title="Email a Representative"><i className="fa fa-envelope" aria-hidden="true"></i></Button>
         <Dialog id="Dialog" open={this.state.openDialog}>
-          <Button aria-role="button" aria-lable="Close" id="close" onClick={this.handleCloseDialog}>&times;</Button>
+          <Button aria-role="button" aria-lable="Close" className="close" onClick={this.handleCloseDialog}>&times;</Button>
           <DialogTitle className="emailTitle"><h4>Email your Representative</h4></DialogTitle>
           <DialogContent id="DialogContent">
             <SearchTypes searchFunction={this.fetchData} />
@@ -126,4 +129,4 @@ class SearchTypes extends React.Component {
 
 
 
-export default App; //make this class available to other files (e.g., index.js) 
+export default CongressDialog; //make this class available to other files (e.g., index.js) 
