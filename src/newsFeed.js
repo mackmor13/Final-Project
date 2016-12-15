@@ -9,7 +9,7 @@ import EmailButton from "./EmailButton.js";
 import "./card.css";
 import _ from 'lodash';
 import moment from 'moment';
-import _NEWS_FEEDS_INOFOMATION from 'newsFeedsInformation';
+import _NEWS_FEEDS_INFORMATION from 'newsFeedsInformation';
 import _SELECT_OPTIONS from 'selectOptions';
 
 
@@ -71,10 +71,6 @@ class NewsFeed extends React.Component {
 
     }
 
-
-    //Should change the article feed in the card groups
-
-
     //Function to fetch data for the selected news feed
     fetchData(stationID) {
 
@@ -119,10 +115,6 @@ class NewsFeed extends React.Component {
 
 
     }
-
-    // handleClick(event) {
-    //   this.props.NewsFeed(this.state.)
-    // }
 
     render() {
 
@@ -188,8 +180,6 @@ class HorizontalNavigation extends React.Component {
         })
         this.setState({ search: true });
     }
-
-
 
 
     render() {
