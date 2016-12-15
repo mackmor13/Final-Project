@@ -1,4 +1,5 @@
-//Options Object for Select 
+// a static object used to generalize information about each category containing different news feeds
+// there is also basic information about each news feed contained inside
 var _NEWS_FEEDS_INFORMATION = {
     "categories": {
         "Australia": {
