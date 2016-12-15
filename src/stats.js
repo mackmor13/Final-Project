@@ -15,6 +15,9 @@ class Stats extends React.Component {
             angry: { count: 0, sampleArticle: '' },
             sad: { count: 0, sampleArticle: '' },
         }
+        // looks at every article on firebase with emotions associated and tallies the total emotions
+        // is complete once a tally of all emotions every created have been accounted forEach
+        // these counts appear on the statistics page
         mostRef.on('value', (snapshot) => {
             snapshot.forEach(function (child) {
                 var article = child.val();
@@ -24,6 +27,7 @@ class Stats extends React.Component {
                 }
             })
         })
+        // Put the statistics into a readable format
         var statRows = Object.keys(stats).map(function (emotion) {
             return <tr>
                 <td>{emotion}</td>
