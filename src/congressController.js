@@ -11,10 +11,9 @@ const baseImageUrl = "https://theunitedstates.io/images/congress/225x275/";
 // Object that can be exported to other pages for data
 var controller = {
     
-    // Gets the Congress Contact form
-   CongressInfo: function(zip) {
+    // Gets the Senators Contact form
+   congressInfo: function(zip) {
         var senate = 'legislators/locate?zip=' + zip;
-        var congress = 'districts/locate?zip=' + zip
         var uri = baseApiUrl + senate;
             return fetch(uri)
             .then(function(res) {
@@ -23,8 +22,8 @@ var controller = {
             })
         },
     
-    //Gets the pokemon's picture'
-    GetPictureUrl: function(id){    
+    //Gets the Senators's picture'
+    getPictureUrl: function(id){    
       if(id != undefined){
           return baseImageUrl + id.bioguide_id + ".jpg";
       }

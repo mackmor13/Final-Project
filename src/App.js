@@ -1,120 +1,135 @@
 import React from 'react';
-import controller from './congressController';
-import { Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl'; 
-import Mailto from 'react-mailto';
-import { Button, Well, Image, Collapse, Form, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
+import { Link, hashHistory } from 'react-router';
+import { Button, Well, Collapse } from 'react-bootstrap';
 import $ from 'jquery';
 import firebase from 'firebase';
-import './MorgansTamp.css';
+import SignUpForm from './join';
+import SignInForm from './login';
+import { Header, Drawer, Navigation, Layout } from 'react-mdl';
 
-//Class which generates the entire application being created
+/* basic sturucture of this website
+    it shows navigation bar when the user is signed in*/
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { user: null };
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ user: user });
+            }
+            else {
+                this.setState({ user: null });
+            }
+        })
+    }
+
+    signUp(email, password, preferredCategory, preferredFeed) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(function (firebaseUser) {
+                var profilePromise = firebaseUser.updateProfile({
+                    preferredCategory: preferredCategory,
+                    preferredFeed: preferredFeed
+                });
+                var userRef = firebase.database().ref('users/' + firebaseUser.uid);
+                var userData = {
+                    preferredCategory: preferredCategory,
+                    preferredFeed: preferredFeed
+                }
+                var userPromise = userRef.set(userData);
+                return Promise.all(profilePromise, userPromise);
+            })
+            .then(() => this.forceUpdate())
+            .catch((err) => alert(err));
+    }
+
+    signIn(email, password) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch((err) => alert(err));
+    }
+
+    signOut() {
+        firebase.auth().signOut();
+        hashHistory.push('/login');
+    }
+
     render() {
+
+        const style = { height: '53rem', position: 'relative' }
+        const color = { color: 'black'};
+
+
         return (
-            // Container which is split into the 12 column layout where 3 columns are the menu and 9 columns are for the headlines
-            <div id="wrapper">
-                 <CongressDialog />
+            <div style={style}>
+                {this.state.user &&
+                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                        <Header transparent title={"React-news"} >
+                        </Header>
+                        <Drawer className="drawer" aria-label="List" title="React-news" >
+                            <Navigation>
+                                <Link aria-label="Main page" aria-role="button" to="/newsfeed" activeClassName="activeLink">News</Link>
+                                <Link aria-label="About Page" aria-role="button" to="/about" activeClassName="activeLink">About Us</Link>
+                                <Link aria-label="Statistics Page" aria-role="button" to="/stats" activeClassName="activeLink">Statistics</Link>
+
+                                <div className="logout">
+                                    <button aria-label="Logout" aria-role="button" className="btn btn-warning" onClick={() => this.signOut()}>Sign out</button>
+                                </div>
+                            </Navigation>
+                        </Drawer>
+
+                        <main className="container">
+                            {this.props.children}
+                        </main>
+                    </Layout>
+                }
+                {!this.state.user && //for sign in and sign up page
+                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                        <Header transparent title="React-news" >
+                        </Header>
+
+                        <main className="container">
+                            {this.props.children}
+                        </main>
+                    </Layout>
+                }
+
+
             </div>
+
+
         );
     }
 }
 
-class CongressDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {contactForm:[]};
-    this.handleOpenDialog = this.handleOpenDialog.bind(this);
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
-    this.fetchData = this.fetchData.bind(this);
-  }
 
-  fetchData(zip) {
-        var thisComponent = this;
-        controller.CongressInfo(zip)
-        .then(function(data){
-            if(data.results.length === 0) {
-                alert('Please enter a valid Zip code')
-            }
-            thisComponent.setState({contactForm:data.results})
-    })
- }
+//gives statistics about emotion distributions in news aricle database
+export class Stats extends React.Component {
 
-  handleOpenDialog() {
-    this.setState({
-      openDialog: true
-    });
-  }
+    componentDidMount() {
+        //checks if firebase has a current user
+        if (!firebase.auth().currentUser) {
+            hashHistory.push('/login');
+        }
+    }
+    render() {
+        return <div><p>stats section</p></div>
+    }
 
-  handleCloseDialog() {
-    this.setState({
-      openDialog: false,
-     contactForm:[]
-    });
-  }
-
-  render() {
-   var  Representative = this.state.contactForm.map(function(element) {
-        return <div>
-       <Image className="RepImage" src={controller.GetPictureUrl(element)} alt="picture for {element.last_name}"/>
-       <Mailto email={element.oc_email} obfuscate={true}>
-      {element.first_name} {element.last_name}</Mailto></div>;      
-   })
-    return (
-      
-      <div>
-        <Button onClick={this.handleOpenDialog}>Show Dialog</Button>
-        <Dialog id="Dialog"  open={this.state.openDialog}>
-        <Button id="close" onClick={this.handleCloseDialog}>&times;</Button>
-          <DialogTitle><h1>Email your Representative</h1></DialogTitle>
-          <DialogContent id="DialogContent">
-            <SearchTypes searchFunction={this.fetchData} />
-            <p>{Representative}</p>
-          </DialogContent>
-        </Dialog>
-      </div>
-    );
-  }
 }
-
-class SearchTypes extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {value:''}
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  
-  // Gets what the user typed
-  handleChange(event){
-    this.setState({value:event.target.value});
-  }
-
-  // Returns what the user typed
-  handleClick(event) {
-    this.props.searchFunction(this.state.value);
-    this.setState({value:''})
-  }
-
-  onSubmit(event) {
-      event.preventDefault();
-      this.handleClick();
-  }
-  
-  //Search function that brings up a modal 
-  render() {
-    return (
-      <Form inline id="search" onSubmit={this.onSubmit}>
-        <InputGroup>
-          <FormControl type="text" value={this.state.value} placeholder="Enter your Zip code..." onChange={this.handleChange} />
-           <InputGroup.Button>
-            <Button onClick={this.handleClick} type="button"><Glyphicon glyph="search" aria-label="Search" /></Button>
-          </InputGroup.Button>
-        </InputGroup>
-      </Form>
-    );
-  }
+// gives an detailed introduction of this website and all the functionalities it has
+export class About extends React.Component {
+    componentDidMount() {
+        //checks if firebase has a current user
+        if (!firebase.auth().currentUser) {
+            hashHistory.push('/login');
+        }
+    }
+    render() {
+        return <div><p>about section</p></div>
+    }
 }
 
 

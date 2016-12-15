@@ -1,0 +1,274 @@
+/* Referred to http://codepen.io/anon/pen/BQpMGy for making the card*/
+
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Montserrat');
+@import 'https://fonts.googleapis.com/css?family=Roboto:700,400';
+
+/* Basic Reset */
+
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    height: 516px;
+    width: 344px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.card_neutral {
+    background-color: #1abc9c;
+}
+
+.card_happy {
+    background-color: #f39c12;
+}
+
+.card_sad {
+    background-color: #3498db;
+}
+
+.card_angry {
+    background-color: #c0392b;
+}
+
+.card_wow {
+    background-color: #8e44ad;
+}
+
+.card_image {
+    height: 205px;
+    width: 344px;
+    padding: 0;
+    background-color: grey;
+    background-image: url("http://static-25.sinclairstoryline.com/resources/media/531dc0f3-177a-45d1-9c14-3fdb1f20c249-large16x9_161025_seattle_home_prices.jpg?1480436803490");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card_text_content {
+    margin: auto;
+    width: 318px;
+    padding: 2.5%;
+    text-align: justify;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card_title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+    text-align: left;
+    font-weight: 700;
+    line-height: 25px;
+    margin-top: 11px;
+    margin-bottom: 7px;
+    overflow: hidden;
+    max-height: 78px;
+    color: white;
+}
+
+.card_description {
+    height: 120px;
+    overflow: scroll;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 19px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.scroller::-webkit-scrollbar {
+    width: 0px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background: white;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: #ddd;
+    visibility: hidden;
+}
+
+.scroller:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.scroller {
+    overflow: auto;
+}
+
+.card_details {
+    font-size: 14px;
+    opacity: 0.78;
+    margin-bottom: 20px;
+}
+
+.card_reaction {
+    margin: 0px;
+    padding: 0px;
+    margin-right: 20px;
+    width: 35px;
+    display: inline-block;
+}
+
+.reaction_icon:hover {
+    color: white;
+    font-size: 35px;
+    opacity: 1;
+    text-align: center;
+    height: 35px;
+}
+
+.reaction_icon {
+    color: black;
+    font-size: 35px;
+    opacity: 0.33;
+    text-align: center;
+    height: 35px;
+}
+
+.reaction_icon.user-clicked {
+    color: black;
+    font-size: 35px;
+    opacity: 1;
+    text-align: center;
+    height: 35px;
+}
+
+
+.reaction_value {
+    font-size: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    text-align: center;
+    color: white;
+    opacity: 0.57;
+}
+
+
+/* Share button stuff */
+
+.card__share {
+    float: right;
+    position: relative;
+    margin-top: -42px;
+}
+
+.card__social {
+    position: absolute;
+    top: 0;
+    right: 0;
+    visibility: hidden;
+    width: 160px;
+    transform: translateZ(0);
+    transform: translateX(0px);
+    transition: transform 0.35s ease;
+}
+
+.card__social--active {
+    visibility: visible;
+    /*z-index: 3;*/
+    transform: translateZ(0);
+    transform: translateX(-48px);
+    transition: transform 0.35s ease;
+}
+
+.share-toggle {
+    z-index: 2;
+}
+
+.share-toggle-neutral:before {
+    content: "\f1e0";
+    font-family: 'FontAwesome';
+    color: #16B792;
+}
+
+.share-toggle-angry:before {
+    content: "\f1e0";
+    font-family: 'FontAwesome';
+    color: #CB2622;
+}
+
+.share-toggle-happy:before {
+    content: "\f1e0";
+    font-family: 'FontAwesome';
+    color: #FFAF00;
+}
+
+.share-toggle-sad:before {
+    content: "\f1e0";
+    font-family: 'FontAwesome';
+    color: #166FB7;
+}
+
+.share-toggle.share-expanded:before {
+    content: "\f00d";
+}
+
+.share-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    outline: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.share-icon:hover,
+.share-icon:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.24);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.twitter {
+    background-color: #00abe3;
+}
+
+.googleplus {
+    background-color: #d3492c;
+}
+
+.facebook,
+.twitter,
+.googleplus {
+    color: #fff;
+}
+
+.facebook:hover,
+.twitter:hover,
+.googleplus:hover {
+    color: #eee;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    color: #2980b9;
+}

@@ -1,43 +1,45 @@
 {
   "name": "finalProject",
+  "author": "Yuyue Zhu, Morgan Mackaay, Jared Praino, Zoshua Colah",
+  "homepage": "https://mackmor13.github.io/finalProject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "react-scripts": "0.7.0"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mackmor13/Final-Project.git"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mackmor13/Final-Project/issues"
   },
-  "homepage": "https://github.com/mackmor13/Final-Project#readme",
   "dependencies": {
     "array-flatten": "^2.1.0",
-    "bootstrap": "^3.3.7",
-    "cheerio": "^0.22.0",
     "firebase": "^3.6.2",
     "jquery": "^3.1.1",
     "js-md5": "^0.4.1",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-transition-group": "^15.4.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.1",
     "react-html-parser": "^1.0.3",
-    "react-lazy-load": "^3.0.10",
     "react-mailto": "^0.4.0",
     "react-mdl": "^1.9.0",
     "react-router": "^3.0.0",
-    "react-scripts": "^0.7.0"
+    "react-scripts": "^0.7.0",
+    "react-select": "^1.0.0-rc.2"
   }
 }
