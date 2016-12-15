@@ -1581,7 +1581,7 @@ class NewsFeed extends React.Component {
 
         this.changeCategory = this.changeCategory.bind(this);
 
-        this.changeFeed = this.changeFeed.bind(this);
+ 
 
         this.fetchData = this.fetchData.bind(this);
 
@@ -1625,21 +1625,7 @@ class NewsFeed extends React.Component {
 
 
     //Should change the article feed in the card groups
-    changeFeed(stationID, sortByOptions) {
 
-        //Go through each article one by one in a loop
-        //in the loop 
-
-        //combine the date and title together and remove all special characters
-        //check if that reference already exists in our articleUniqueIDs array
-        //add that reference immidietely in our articleUniqueIDs array
-
-        //if it is a new article push it to the array for the source selected else dont do anything 
-        //(remember to add keys - happy,sad,angry,wow,neutral)
-
-        //Set the feedData state to load articles
-
-    }
 
     //Function to fetch data for the selected news feed
     fetchData(stationID) {
@@ -1693,7 +1679,7 @@ class NewsFeed extends React.Component {
     render() {
 
         return (<main>
-            <HorizontalNavigation selectedCategory={this.state.categorySelected} selectedFeed={this.state.feedSelected} changeCategory={this.state.changeCategory} changeFeed={this.state.changeCategory} fetchData={this.fetchData} />
+            <HorizontalNavigation selectedCategory={this.state.categorySelected} selectedFeed={this.state.feedSelected} changeCategory={this.state.changeCategory} fetchData={this.fetchData} />
         </main>
         );
     }
