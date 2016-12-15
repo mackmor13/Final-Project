@@ -9,8 +9,8 @@ import EmailButton from "./EmailButton.js";
 import "./card.css";
 import _ from 'lodash';
 import moment from 'moment';
-import _NEWS_FEEDS_INFORMATION from 'newsFeedsInformation';
-import _SELECT_OPTIONS from 'selectOptions';
+import _NEWS_FEEDS_INFORMATION from './newsFeedsInformation';
+import _SELECT_OPTIONS from './selectOptions';
 
 
 // updates news to firebase. record selected categories

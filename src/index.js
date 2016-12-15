@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import App from './App';
 import About from './about.js';
-import Stats from './stats';
+import Stats from './stats.js';
 import NewsFeed from './newsFeed';
 import Join from './join';
 import Login from './login';
