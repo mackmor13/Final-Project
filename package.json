@@ -26,7 +26,6 @@
   "dependencies": {
     "array-flatten": "^2.1.0",
     "bootstrap": "^3.3.7",
-    "bootstrap-css": "^3.0.0",
     "firebase": "^3.6.2",
     "jquery": "^3.1.1",
     "js-md5": "^0.4.1",

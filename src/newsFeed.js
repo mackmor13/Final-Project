@@ -1980,8 +1980,6 @@ class CardItem extends React.Component {
                         <div className="card_details">
 
 
-
-
                         </div>
 
                         <div className="card_reactions">
