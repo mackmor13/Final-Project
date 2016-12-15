@@ -32,7 +32,7 @@ class CongressDialog extends React.Component {
   // Gets the data of the representatives based on zip from api
   fetchData(zip) {
     var thisComponent = this;
-    controller.congressInfo(zip)
+    controller.CongressInfo(zip)
       .then(function (data) {
         if (data.results.length === 0) {
           alert('Please enter a valid Zip code')
@@ -60,7 +60,7 @@ class CongressDialog extends React.Component {
   render() {
     var Representative = this.state.contactForm.map(function (element) {
       return <div>
-        <Image className="RepImage" src={controller.getPictureUrl(element)} alt="picture for {element.last_name}" />
+        <Image className="RepImage" src={controller.GetPictureUrl(element)} alt="picture for {element.last_name}" />
         <div><Mailto email={element.oc_email} obfuscate={true}>{element.first_name} {element.last_name}</Mailto></div>
         <div>Phone: {element.phone}</div><div>Party: {element.party}</div></div>;
     })

@@ -59,13 +59,13 @@ class App extends React.Component {
     render() {
 
         const style = { height: '53rem', position: 'relative' }
-        const color = { color: 'black'};
+        const color = { background: '#d0d0d0 center / cover' };
 
 
         return (
             <div style={style}>
                 {this.state.user &&
-                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                    <Layout style={color}>
                         <Header transparent title={"React-news"} >
                         </Header>
                         <Drawer className="drawer" aria-label="List" title="React-news" >
@@ -86,7 +86,7 @@ class App extends React.Component {
                     </Layout>
                 }
                 {!this.state.user && //for sign in and sign up page
-                    <Layout style={{ background: '#d0d0d0 center / cover' }}>
+                    <Layout style={color}>
                         <Header transparent title="React-news" >
                         </Header>
 
