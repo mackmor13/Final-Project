@@ -16,6 +16,7 @@ class SignUpForm extends React.Component {
       'email': undefined,
       'password': undefined,
       'sedPassword': undefined,
+      errMessage: '',
       showSpinner: false
     };
 
@@ -45,10 +46,22 @@ class SignUpForm extends React.Component {
 
     event.preventDefault(); //don't submit
     /* Create a new user and save their information */
+    this.setState({showSpinner : true});
+    var thisComponent = this;
     this.setState({ showSpinner: true })
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .catch((err) => alert(err));
-    hashHistory.push('/newsfeed');
+      .catch(function (err){
+        console.log(err);
+        thisComponent.setState({
+          errMessage : err.message,
+          showSpinner : false
+        })
+      })
+      .then(function(){
+        if(firebase.auth().currentUser){
+          hashHistory.push('/newsfeed');
+        }
+      })
   }
 
 
@@ -106,6 +119,10 @@ class SignUpForm extends React.Component {
 
     return (
       <div>
+        {this.state.errMessage!='' &&
+                    <div className="alert alert-danger" role="alert">{this.state.errMessage}</div>
+        }
+
         <header className="title">
           <strong>Sign Up Form</strong>
         </header>

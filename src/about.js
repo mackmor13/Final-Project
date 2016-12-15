@@ -24,22 +24,23 @@ class AboutUs extends React.Component {
                     Through this product,
                     </p>
                 <ol>
-                    you can get the most up-to-date news from all of the world.
-                        You can search by category, and then search by feed.
-                        You can see all the news in cards with their summaires.
-                        You can can go read the full article by clicking on the linked titles.
-                        You can also express how you feel about the news by clicking on the emojis underneath the articles.
-                        You can directly contact a representative by sending emails to them.
-                        You can see how others think about this news by checking the color of the card or by the number of clicks under each emotion.
-                        You can share the interesting news to Facebook.
+                        <li>You can get the most up-to-date news from all of the world.</li>
+                        <li>You can search by category, and then search by feed.</li>
+                        <li>You can see all the news in cards with their summaires.</li>
+                        <li>You can can go read the full article by clicking on the linked titles.</li>
+                        <li>You can also express how you feel about the news by clicking on the emojis underneath the articles.</li>
+                        <li>You can directly contact a representative by sending emails to them.</li>
+                        <li>You can see how others think about this news by checking the color of the card or by the number of clicks under each emotion.</li>
+                        <li>You can share the interesting news to Facebook.</li>
                     </ol>
 
                 <p className="aboutInfoCard">Color of the card:</p>
                 <ol>
-                    Yellow = <span className="yellow">Happy</span>
-                    Red    = <span className="red">Angry</span>
-                    Blue   = <span className="blue">Sad</span>
-                    Teal   = <span className="teal">Neutral</span>
+                    <li>Yellow = <span className="yellow">Happy</span></li>
+                    <li>Red    = <span className="red">Angry</span></li>
+                    <li>Blue   = <span className="blue">Sad</span></li>
+                    <li>Purple   = <span className="purple">Wow</span></li>
+                    <li>Teal   = <span className="teal">Neutral</span></li>
                 </ol>
 
                 <p className="aboutInfoParagraph">

@@ -32,7 +32,7 @@ class CongressDialog extends React.Component {
   // Gets the data of the representatives based on zip from api
   fetchData(zip) {
     var thisComponent = this;
-    controller.congressInfo(zip)
+    controller.CongressInfo(zip)
       .then(function (data) {
         if (data.results.length === 0) {
           alert('Please enter a valid Zip code')

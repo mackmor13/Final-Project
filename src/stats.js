@@ -5,8 +5,8 @@ import emoji from "../public/img/emoji.jpg";
 
 class Stats extends React.Component {
 
-    constructor(props) {
-        super(props);
+    render() {
+        console.log('dd');
         var mostRef = firebase.database().ref('articles');
         var stats = {
             wow: { count: 0, sampleArticle: '' },
@@ -15,6 +15,7 @@ class Stats extends React.Component {
             angry: { count: 0, sampleArticle: '' },
             sad: { count: 0, sampleArticle: '' },
         }
+        console.log('dd');
         mostRef.on('value', (snapshot) => {
             snapshot.forEach(function (child) {
                 var article = child.val();
@@ -24,6 +25,7 @@ class Stats extends React.Component {
                 }
             })
         })
+        console.log('dd');
         var statRows = Object.keys(stats).map(function (emotion) {
             return <tr>
                 <td>{emotion}</td>
@@ -31,13 +33,7 @@ class Stats extends React.Component {
                 <td>{stats[emotion].sampleArticle}</td>
             </tr>
         })
-        this.state = {statRows:statRows}
-
-    }
-
-
-    render() {
-
+        console.log('dd');
         return (
             <div>
                 <p>This table shows both the most popular articles as well as the amount of reactions for each emotion. 
@@ -52,7 +48,7 @@ class Stats extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.statRows}
+                        {statRows}
                     </tbody>
                 </table>
                 <img src={emoji} alt="emotion" />

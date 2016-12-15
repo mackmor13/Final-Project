@@ -12,7 +12,7 @@ const baseImageUrl = "https://theunitedstates.io/images/congress/225x275/";
 var controller = {
     
     // Gets the Senators Contact form
-   congressInfo: function(zip) {
+   CongressInfo: function(zip) {
         var senate = 'legislators/locate?zip=' + zip;
         var uri = baseApiUrl + senate;
             return fetch(uri)
@@ -23,7 +23,7 @@ var controller = {
         },
     
     //Gets the Senators's picture'
-    getPictureUrl: function(id){    
+    GetPictureUrl: function(id){    
       if(id != undefined){
           return baseImageUrl + id.bioguide_id + ".jpg";
       }

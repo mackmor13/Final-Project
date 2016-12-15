@@ -4,7 +4,7 @@ import { Link, hashHistory } from 'react-router';
 import firebase from 'firebase';
 import './style.css';
 import { Spinner } from 'react-mdl';
-// import "./style.css";
+import "./style.css";
 
 /*A form for logging into a website. Specifies email, password.*/
 class SignInForm extends React.Component {
@@ -14,12 +14,13 @@ class SignInForm extends React.Component {
         this.state = {
             'email': undefined,
             'password': undefined,
+            errMessage: '',
             showSpinner: false
         };
 
         //function binding
         this.handleChange = this.handleChange.bind(this);
-
+        this.signIn = this.signIn.bind(this);
     }
 
     componentDidMount() {
@@ -49,8 +50,16 @@ class SignInForm extends React.Component {
     signIn(event) {
         event.preventDefault(); //don't submit
         this.setState({ showSpinner: true })
+        var thisComponent = this;
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            .catch((err) => alert(err));
+            .catch(function (err){
+                console.log(err);
+                thisComponent.setState({
+                    errMessage:err.message,
+                    showSpinner: false
+            });
+            })
+
     }
 
     /*A helper function to validate a value based on a hash of validations
@@ -100,6 +109,10 @@ class SignInForm extends React.Component {
 
         return (
             <div>
+                {this.state.errMessage!='' &&
+                    <div className="alert alert-danger" role="alert">{this.state.errMessage}</div>
+                }
+                
                 <header>
                     <strong>PLEASE LOG IN FIRST</strong>
                 </header>
