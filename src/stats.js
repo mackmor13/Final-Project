@@ -6,6 +6,9 @@ import emoji from "../public/img/emoji.jpg";
 class Stats extends React.Component {
     constructor(props) {
         super(props);
+        // looks at every article on firebase with emotions associated and tallies the total emotions
+        // is complete once a tally of all emotions every created have been accounted forEach
+        // these counts appear on the statistics page
         var mostRef = firebase.database().ref('articles');
         var stats = {
             wow: { count: 0, sampleArticle: '' },
@@ -24,7 +27,7 @@ class Stats extends React.Component {
                 }
             })
         })
-
+        // Put the statistics into a readable format
         var statRows = Object.keys(stats).map(function (emotion) {
             return <tr>
                 <td>{emotion}</td>
@@ -32,7 +35,7 @@ class Stats extends React.Component {
                 <td>{stats[emotion].sampleArticle}</td>
             </tr>
         })
-        this.state = {statRows:statRows}
+        this.state = { statRows: statRows }
     }
 
 
