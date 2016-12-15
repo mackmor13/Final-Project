@@ -4,9 +4,8 @@ import firebase from 'firebase';
 import emoji from "../public/img/emoji.jpg";
 
 class Stats extends React.Component {
-
-    render() {
-
+    constructor(props) {
+        super(props);
         var mostRef = firebase.database().ref('articles');
         var stats = {
             wow: { count: 0, sampleArticle: '' },
@@ -33,10 +32,19 @@ class Stats extends React.Component {
                 <td>{stats[emotion].sampleArticle}</td>
             </tr>
         })
+        this.state = {statRows:statRows}
+    }
+
+
+
+    render() {
+
+        var mostRef = firebase.database().ref('articles');
+
 
         return (
             <div>
-                <p>This table shows both the most popular articles as well as the amount of reactions for each emotion. 
+                <p>This table shows both the most popular articles as well as the amount of reactions for each emotion.
                 You can use this table to find our top trending articles as well as get a sense of the general
                 public's sentiment towards the news. </p>
                 <table className="table table-condensed table-striped">
@@ -48,7 +56,7 @@ class Stats extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {statRows}
+                        {this.state.statRows}
                     </tbody>
                 </table>
                 <img src={emoji} alt="emotion" />
