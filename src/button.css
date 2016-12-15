@@ -1,0 +1,26 @@
+/*Styles the image of the representatives*/
+.RepImage {
+    height: 100px;
+    width: 115px;
+    border-radius: 50%;
+    padding: 2%;
+    text-align: center;
+}
+
+/*styles the dialog box*/
+Dialog {
+    position: relative;
+    left: 50%;
+    top: 1% !important;
+    margin-left: -150px;
+    margin-right: -150px;
+    height: 90%;
+    width: 30%;
+    overflow-y: scroll;
+}
+
+/*styles the x button to close*/
+#close {
+    float: right;
+    background-color: lightgrey;
+}
