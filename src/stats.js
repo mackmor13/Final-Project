@@ -5,7 +5,8 @@ import emoji from "../public/img/emoji.jpg";
 
 class Stats extends React.Component {
 
-    render() {
+    constructor(props) {
+        super(props);
         var mostRef = firebase.database().ref('articles');
         var stats = {
             wow: { count: 0, sampleArticle: '' },
@@ -30,6 +31,13 @@ class Stats extends React.Component {
                 <td>{stats[emotion].sampleArticle}</td>
             </tr>
         })
+        this.state = {statRows:statRows}
+
+    }
+
+
+    render() {
+
         return (
             <div>
                 <table className="table table-condensed table-striped">
@@ -41,7 +49,7 @@ class Stats extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {statRows}
+                        {this.state.statRows}
                     </tbody>
                 </table>
                 <img src={emoji} alt="emotion" />
