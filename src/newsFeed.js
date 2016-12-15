@@ -12,7 +12,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.css';
 import _NEWS_FEEDS_INFORMATION from 'newsFeedsInformation';
-import _SELECT_OPTIONS from 'selectOptions';
+import _SELECT_OPTIONS from 'optionsSelect';
 
 
 // updates news to firebase. record selected categories
