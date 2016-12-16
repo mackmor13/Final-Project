@@ -1676,14 +1676,14 @@ class NewsFeed extends React.Component {
     render() {
 
         return (<main>
-            <HorizontalNavigation selectedCategory={this.state.categorySelected} selectedFeed={this.state.feedSelected} changeCategory={this.state.changeCategory} fetchData={this.fetchData} />
+            <NewsFeedComponents  selectedCategory={this.state.categorySelected} selectedFeed={this.state.feedSelected} changeCategory={this.state.changeCategory} fetchData={this.fetchData} />
         </main>
         );
     }
 }
 
 // provides two select dropdown menus and news cards
-class HorizontalNavigation extends React.Component {
+class NewsFeedComponents extends React.Component {
 
     constructor(props) {
 
@@ -1738,13 +1738,10 @@ class HorizontalNavigation extends React.Component {
         this.setState({ search: true });
     }
 
-
-
-
     render() {
         var articleCards = this.state.articles.map((article) => {
-            return <Cell col={4}><CardItem article={article} key={article.key} />
-            </Cell>
+            return <CardItem article={article} key={article.key} />
+
         })
 
 
@@ -1755,15 +1752,13 @@ class HorizontalNavigation extends React.Component {
                     <Select aria-lable="Choose Category" aria-role="dropdown" className="selectForm select" name="form-field-name" resetValue='' placeholder="Choose a city or a category..." value={this.state.categorySelected} options={_SELECT_OPTIONS.categories} onChange={this.changeCategory} />
 
                     <Select aria-lable="Choose Feed" aria-role="dropdown" className="selectForm selector" name="form-field-names" resetValue='' placeholder="Then select a news feed here..." value={this.state.feedSelected} options={this.state.feedsForCategory} onChange={this.changeFeed} />
-
-                    <Button aria-lable="Filter Articles" aria-role="button" className="mdl-button" raised onClick={this.submit}>Filter</Button>
+                    <Button aria-lable="Filter Articles" aria-role="button" className="mdl-button" raised onClick={this.submit}>Search</Button>
                 </div>
                 {this.state.search &&
-                    <Grid >
+                    <Grid className="demo-grid-1">
                         {articleCards}
                     </Grid>
                 }
-
             </div>
         );
     }

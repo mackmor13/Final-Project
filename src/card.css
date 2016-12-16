@@ -4,6 +4,23 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather|Montserrat');
 @import 'https://fonts.googleapis.com/css?family=Roboto:700,400';
 
+/*
+    EmojiSymbols Font (c)blockworks - Kenichi Kaneko
+    http://emojisymbols.com/
+    */
+
+@font-face {
+  font-family: "EmojiSymbols";
+  src: url('./emojiFont/font/EmojiSymbols-Regular.woff') format('woff');
+  text-decoration: none;
+  font-style: normal;
+}
+
+.emj {
+  font-family: "EmojiSymbols";
+  line-height: 1;
+}
+
 /* Basic Reset */
 
 *,
@@ -22,6 +39,7 @@
     margin-bottom: 12px;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+    display: inline-block;
 }
 
 .card_neutral {

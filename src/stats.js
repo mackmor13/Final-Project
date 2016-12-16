@@ -62,7 +62,7 @@ class Stats extends React.Component {
                         {this.state.statRows}
                     </tbody>
                 </table>
-                <img src={emoji} alt="emotion" />
+                <img src={emoji} alt="emotions picture" />
             </div>
         )
     }
