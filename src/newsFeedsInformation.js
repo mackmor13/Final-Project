@@ -1224,3 +1224,5 @@ var _NEWS_FEEDS_INFORMATION = {
         }
     }
 };
+
+export var _NEWS_FEEDS_INFORMATION;
